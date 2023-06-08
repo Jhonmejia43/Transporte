@@ -9,7 +9,7 @@ const vendedorSchema = new mongoose.Schema({
     createAT : {default: Date.now }
 });
 
-const clientesSchema = new mongoose.Schema({
+const clienteSchema = new mongoose.Schema({
     cedula: { type: String, require:true },
     nombre: { type: String, minlenght: 5, require:true },
     createAT : {default: Date.now }
@@ -29,7 +29,7 @@ const busSchema = new mongoose.Schema({
 
 });
 
-const rutasSchema = new mongoose.Schema({
+const rutaSchema = new mongoose.Schema({
     precio:{type: Number, require:true},
     origen:{type:String, require:true},
     destino:{type:String, require:true},
@@ -53,3 +53,5 @@ const ticketSchema = new mongoose.Schema({
     createAT : {default: Date.now }
 
 })
+
+export default dato [{vendedorSchema},{clienteSchema},{busSchema},{rutaSchema},{ticketSchema}]
