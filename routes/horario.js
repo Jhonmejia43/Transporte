@@ -1,5 +1,5 @@
 import { Router } from "express"
-import httpHorario from "../controllers/ruta.js";
+import httpHorario from "../controllers/horario.js";
 import { check } from "express-validator";
 
 const router = new Router()
@@ -9,7 +9,7 @@ router.get('/horario',[
     check("hora_llegada", "Digite la hora estimada de llegada").not().isEmpty(),
     check("fecha_partida", "Digite la fecha de llegada").not().isEmpty(),
     check("hora_llegada", "Digite la hora de llegada ").not().isEmpty()
-],httpHorario.getruta);
+],httpHorario.grtHorario);
 
 // router.get('/ruta/:codigo',funcionesruta.getrutaNombre);
 

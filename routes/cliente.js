@@ -8,7 +8,7 @@ router.get('/cliente',[
     check("cedula", "Digite su cedula").not().isEmpty(),
     check("nombre", "Digite su nombre").isLength({min:5}),
     check("nombre", "Digite su nombre").isEmpty()
-],httpCliente.getcliente);
+],httpCliente.getCliente);
 
 // router.get('/cliente/:cedula',funcionescliente.getclienteNombre);
 

@@ -7,7 +7,7 @@ const router=new Router()
 
 router.get('/bus',[
     check("cantidad_asientos", "Asientos disponibles").not().isEmpty(),
-    check("empresa_asignada", "Nombre de la empresa").not().isEmpty()
+    check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
 ],httpBus.getBus);
 
 // router.get('/bus/:codigo',funcionesbus.getbusCodigo);

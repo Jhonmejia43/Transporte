@@ -12,14 +12,14 @@ router.get('/ticket',[
     check("fecha_venta","Digite la fecha").isDate().isEmpty(),
     check("hora_venta","Digite la hora").isDate().isEmpty(),
 ]
-,funcionesticket.getticket);
+,httpTicket.getTicket);
 
-router.get('/ticket/:codigo',funcionesticket.getticketCodigo);
+// router.get('/ticket/:codigo',funcionesticket.getticketCodigo);
 
-router.post('/agregar',funcionesticket.postAgregarticket);
+// router.post('/agregar',funcionesticket.postAgregarticket);
 
-router.put('/ticket/:codigo', funcionesticket.putEditarticket);
+// router.put('/ticket/:codigo', funcionesticket.putEditarticket);
 
-router.delete('/ticket/:codigo', funcionesticket.deleteticket);
+// router.delete('/ticket/:codigo', funcionesticket.deleteticket);
 
 export default router

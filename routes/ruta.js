@@ -8,7 +8,7 @@ router.get('/ruta',[
     check("precio","Digite su cedula").not().isEmpty(),
     check("origen","Digite su cedula").not().isEmpty(),
     check("destino","Digite su cedula").not().isEmpty()
-],funcionesruta.getruta);
+],httpRuta.getRuta);
 
 // router.get('/ruta/:codigo',funcionesruta.getrutaNombre);
 

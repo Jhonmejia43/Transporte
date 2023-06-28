@@ -1,5 +1,5 @@
 import { Router } from "express"
-import httpConductor from "../controllers/ruta.js";
+import httpConductor from "../controllers/conductor.js";
 import { check } from "express-validator";
 
 const router = new Router()
@@ -10,7 +10,7 @@ router.get('/conductor', [
     check("id_bus", "Digite el id del bus").not().isEmpty(),
     check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty()
-], httpConductor.getruta);
+], httpConductor.getConductor);
 
 // router.get('/ruta/:codigo',funcionesruta.getrutaNombre);
 
