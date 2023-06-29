@@ -5,8 +5,7 @@ import { check } from "express-validator"
 
 const router = new Router()
 
-router.get('/bus/:numero_bus', [
-], httpBus.getBus);
+router.get('/bus/:numero_bus', httpBus.getBus);
 
 router.post('/bus/agregar', [
     check("numero_bus", "Numero del bus").not().isEmpty(),
