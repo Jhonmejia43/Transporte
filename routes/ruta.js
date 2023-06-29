@@ -29,4 +29,7 @@ router.delete('/ruta/:id',[
     check("id","Digite su id").not().isEmpty(),
 ],httpRuta.getRutaId);
 
+router.put('inactivarRuta/:id',httpRuta.putRutaInactivar)
+router.put('activarRuta/:id',httpRuta.putRutaActivar)
+
 export default router

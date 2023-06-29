@@ -26,4 +26,7 @@ router.put('/ruta/:id',[
 
 router.delete('/ruta/:id', httpHorario.deleteHorario);
 
+router.put('inactivarHorario/:id',httpHorario.putHorarioInactivar)
+router.put('activarHorario/:id',httpHorario.putHorarioActivar)
+
 export default router

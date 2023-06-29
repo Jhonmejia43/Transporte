@@ -50,6 +50,25 @@ const httpRuta ={
         } catch (error) {
             res.status(400).json({error})
         }
+    },
+    putRutaInactivar: async ()=>{
+        try {
+            const {id}=req.params
+            const ruta=await Ruta.findByIdAndUpdate(id,{estado:0},{new:true})
+            res.json({ruta})
+        } catch (error) {
+            res.status(400).json({error})
+            
+        }
+    },
+    putRutaActivar: async ()=>{
+        try {
+            const {id}=req.params
+            const ruta=await Ruta.findByIdAndUpdate(id,{estado:1},{new:true})
+            res.json({ruta})
+        } catch (error) {
+            res.status(400).json({error})
+        }
     }
 }
 export default httpRuta
