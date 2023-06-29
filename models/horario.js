@@ -6,7 +6,7 @@ const horarioSchema = new mongoose.Schema({
     hora_llegada: { type: Date, require: true },
     fecha_partida: { type: Date, require: true },
     fecha_llegada: { type: Date, require: true },
-    createAT: { default: Date.now },
+    createAT: { type:Date,default: Date.now },
     estado: { type: Boolean, default: false }
 });
 

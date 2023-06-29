@@ -15,11 +15,6 @@ router.post('/bus/agregar', [
     validarCampos
 ], httpBus.postBus);
 
-router.post('/bus/buscar', [
-    check("numero_bus", "Número de bus requerido").not().isEmpty(),
-    validarCampos
-], httpBus.postBuscarBus);
-
 router.put('/bus/:numero_bus', [
     check("cantidad_asientos", "Asientos disponibles requeridos").not().isEmpty(),
     validarCampos

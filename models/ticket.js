@@ -8,7 +8,7 @@ const ticketSchema = new mongoose.Schema({
     bus_id:{type:mongoose.Schema.Types.ObjectId,ref:'busSchema', require:true},
     fecha_venta:{type:Date, require:true},
     hora_venta:{type:Date, require:true},
-    createAT : {default: Date.now },
+    createAT : {type:Date,default: Date.now },
     estado:{type:Boolean, default:false}
 })
 

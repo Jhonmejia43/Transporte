@@ -6,7 +6,7 @@ const conductorSchema = new mongoose.Schema({
     id_bus: { type: mongoose.Schema.Types.ObjectId, ref: 'busSchema', require: true },
     experiencia: { type: String, require: true },
     telefono: { type: String, require: true },
-    createAT: { default: Date.now },
+    createAT: { type:Date,default: Date.now },
     estado: { type: Boolean, default: false }
 
 });
