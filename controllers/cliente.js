@@ -66,6 +66,25 @@ const httpCliente = {
         } catch (error) {
             res.status(400).json({error})
         }
+    },
+    putClienteInactivar: async ()=>{
+        try {
+            const {id}=req.params
+            const cliente=await Cliente.findByIdAndUpdate(id,{estado:0},{new:true})
+            res.json({cliente})
+        } catch (error) {
+            res.status(400).json({error})
+            
+        }
+    },
+    putPersonaActivar: async ()=>{
+        try {
+            const {id}=req.params
+            const cliente=await Cliente.findByIdAndUpdate(id,{estado:1})
+            res.json({cliente})
+        } catch (error) {
+            res.status(400).json({error})
+        }
     }
 
 }
