@@ -13,12 +13,12 @@ const app = express()
 app.use(express.json()) 
 
 app.use("/api/bus", bus)
-app.use("/api/bus", cliente)
-app.use("api/conductor", conductor)
-app.use("api/horario", horario)
-app.use("/api/bus", ruta)
-app.use("/api/bus", ticket)
-app.use("/api/bus", vendedor)
+app.use("/api/cliente", cliente)
+app.use("/api/conductor", conductor)
+app.use("/api/horario", horario)
+app.use("/api/ruta", ruta)
+app.use("/api/ticket", ticket)
+app.use("/api/vendedor", vendedor)
 
 app.listen(process.env.PORT,()=>{
     mongoose.connect(process.env.mongoDB)
