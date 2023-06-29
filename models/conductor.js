@@ -7,7 +7,7 @@ const conductorSchema = new mongoose.Schema({
     experiencia: { type: String, require: true },
     telefono: { type: String, require: true },
     createAT: { type:Date,default: Date.now },
-    estado: { type: Boolean, default: false }
+    estado: { type: Boolean, default: 1 }
 
 });
 

@@ -9,7 +9,7 @@ const ticketSchema = new mongoose.Schema({
     fecha_venta:{type:Date, require:true},
     hora_venta:{type:Date, require:true},
     createAT : {type:Date,default: Date.now },
-    estado:{type:Boolean, default:false}
+    estado:{type:Boolean, default:1}
 })
 
 export default mongoose.model("Ticket", ticketSchema)

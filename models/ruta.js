@@ -5,7 +5,7 @@ const rutaSchema = new mongoose.Schema({
     origen:{type:String, require:true},
     destino:{type:String, require:true},
     createAT : {type:Date,default: Date.now },
-    estado:{type:Boolean, default:false}
+    estado:{type:Boolean, default:1}
 
 });
 
