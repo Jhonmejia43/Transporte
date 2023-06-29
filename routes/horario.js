@@ -1,7 +1,7 @@
 import { Router } from "express"
 import httpHorario from "../controllers/horario.js";
 import { check } from "express-validator";
-import validarCampos from "..middlewares/validar.js"
+import validarCampos from "../middlewares/validar.js"
 
 const router = new Router()
 
