@@ -19,6 +19,7 @@ router.post('/agregar',[
     check("hora_venta","Digite la hora").isDate().isEmpty(),
 ],httpTicket.postTicket);
 
-// router.delete('/ticket/:codigo', funcionesticket.deleteticket);
+router.put('inactivarTicket/:id',httpTicket.putTicketInactivar)
+router.put('activarTicket/:id',httpTicket.putTicketActivar)
 
 export default router
