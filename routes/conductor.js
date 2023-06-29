@@ -26,5 +26,7 @@ router.put('/ruta/:id',[
 ], httpConductor.putConductor);
 
 router.delete('/ruta/:id', httpConductor.deleteConductor);
+router.put('inactivarConductor/:id',httpConductor.putConductorInactivar)
+router.put('activarConductor/:id',httpConductor.putConductorActivar)
 
 export default router

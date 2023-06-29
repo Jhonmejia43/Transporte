@@ -23,6 +23,9 @@ router.put('/cliente/:id', [
     check("telefono", "Digite su telefono").not().isEmpty()
 ], httpCliente.putCliente);
 
-router.delete('/cliente/:id', httpCliente.de);
+router.delete('/cliente/:id', httpCliente.deleteCliente);
+
+router.put('inactivarCliente/:id',httpCliente.putClienteInactivar)
+router.put('activarCliente/:id',httpCliente.putClienteActivar)
 
 export default router

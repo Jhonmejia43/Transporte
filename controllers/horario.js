@@ -55,6 +55,26 @@ const httpHorario ={
         } catch (error) {
             res.status(400).json({error})
         }
+    },
+    putHorarioInactivar: async ()=>{
+        try {
+            const {id}=req.params
+            const horario=await Horario.findByIdAndUpdate(id,{estado:0},{new:true})
+            res.json({horario})
+        } catch (error) {
+            res.status(400).json({error})
+            
+        }
+    },
+    putHorarioActivar: async ()=>{
+        try {
+            const {id}=req.params
+            const horario=await Horario.findByIdAndUpdate(id,{estado:1},{new:true})
+            res.json({horario})
+        } catch (error) {
+            res.status(400).json({error})
+        }
     }
+
 }
 export default httpHorario

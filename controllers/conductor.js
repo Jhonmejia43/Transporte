@@ -55,6 +55,25 @@ const httpConductor ={
         } catch (error) {
             res.status(400).json({error})
         }
+    },
+    putConductorInactivar: async ()=>{
+        try {
+            const {id}=req.params
+            const conductor=await Conductor.findByIdAndUpdate(id,{estado:0},{new:true})
+            res.json({conductor})
+        } catch (error) {
+            res.status(400).json({error})
+            
+        }
+    },
+    putConductorActivar: async ()=>{
+        try {
+            const {id}=req.params
+            const conductor=await Conductor.findByIdAndUpdate(id,{estado:1},{new:true})
+            res.json({conductor})
+        } catch (error) {
+            res.status(400).json({error})
+        }
     }
 
 }

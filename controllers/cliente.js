@@ -77,10 +77,10 @@ const httpCliente = {
             
         }
     },
-    putPersonaActivar: async ()=>{
+    putClienteActivar: async ()=>{
         try {
             const {id}=req.params
-            const cliente=await Cliente.findByIdAndUpdate(id,{estado:1})
+            const cliente=await Cliente.findByIdAndUpdate(id,{estado:1},{new:true})
             res.json({cliente})
         } catch (error) {
             res.status(400).json({error})

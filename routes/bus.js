@@ -23,5 +23,8 @@ router.put('/bus/:numero_bus', [
 
 router.delete('/bus/:numero_bus', httpBus.deleteBus);
 
+router.put('inactivarBus/:id',httpBus.putBusInactivar)
+router.put('activarBus/:id',httpBus.putBusActivar)
+
 export default router
 

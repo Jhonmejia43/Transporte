@@ -4,21 +4,20 @@ import { check } from "express-validator";
 
 const router=new Router()
 
-router.get('/ticket',[
+router.get('/ticket', httpTicket.getTicket);
+
+router.get('/ticket/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+],httpTicket.getTicketId);
+
+router.post('/agregar',[
     check("vendedor_id", "Digite el id del vendedor").isMongoId(),
     check("cliente_id", "Digite el id del cliente").isMongoId(),
     check("ruta_id", "Digite el id de la ruta").isMongoId(),
     check("bus_id", "Digite el id del bus").isMongoId(),
     check("fecha_venta","Digite la fecha").isDate().isEmpty(),
     check("hora_venta","Digite la hora").isDate().isEmpty(),
-]
-,httpTicket.getTicket);
-
-// router.get('/ticket/:codigo',funcionesticket.getticketCodigo);
-
-// router.post('/agregar',funcionesticket.postAgregarticket);
-
-// router.put('/ticket/:codigo', funcionesticket.putEditarticket);
+],httpTicket.postTicket);
 
 // router.delete('/ticket/:codigo', funcionesticket.deleteticket);
 
