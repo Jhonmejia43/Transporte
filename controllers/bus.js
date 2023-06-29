@@ -13,7 +13,7 @@ const httpBus = {
             res.json(bus);
         } catch (error) {
             res.status(500).json({ error: "Error en el servidor" });
-        }
+        }  
     },
 
     postBus: async (req, res) => {
