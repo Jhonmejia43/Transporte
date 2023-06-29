@@ -4,11 +4,10 @@ import { check } from "express-validator"
 
 const router = new Router()
 
-router.get('/cliente', [
-], httpCliente.getCliente);
+router.get('/cliente', httpCliente.getCliente);
 
 router.get('/cliente/:id', [
-    check("id", "Digite su cedula").not().isEmpty(),
+    check("id", "Digite el id").not().isEmpty(),
 ], httpCliente.getClienteId);
 
 router.post('cliente/agregar', [

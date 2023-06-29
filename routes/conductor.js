@@ -4,20 +4,27 @@ import { check } from "express-validator";
 
 const router = new Router()
 
-router.get('/conductor', [
+router.get('/conductor', httpConductor.getConductor);
+
+router.get('/ruta/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+],httpConductor.getConductorId);
+
+router.post('/agregar',[
     check("cedula", "Digite su cedula").not().isEmpty(),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("id_bus", "Digite el id del bus").not().isEmpty(),
     check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty()
-], httpConductor.getConductor);
+],httpConductor.postConductor);
 
-// router.get('/ruta/:codigo',funcionesruta.getrutaNombre);
+router.put('/ruta/:id',[
+    check("nombre", "Digite su nombre").not().isEmpty(),
+    check("id_bus", "Digite el id del bus").not().isEmpty(),
+    check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
+    check("telefono", "Digite su telefono").not().isEmpty()
+], httpConductor.putConductor);
 
-// router.post('/agregar',funcionesruta.postAgregarruta);
-
-// router.put('/ruta/:codigo', funcionesruta.putEditarruta);
-
-// router.delete('/ruta/:codigo', funcionesruta.deleteruta);
+router.delete('/ruta/:id', httpConductor.deleteConductor);
 
 export default router

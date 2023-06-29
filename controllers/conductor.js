@@ -1,9 +1,61 @@
-import { validationResult } from "express-validator";
 import Conductor from "../models/conductor.js";
 
 const httpConductor ={
-    getConductor:async(req,res)=>{
-        res.json("Base de datos")
+    getConductor: async (req, res) => {
+        try {
+            const conductor = await Conductor.find()
+            res.json({ conductor })
+
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+
+    },
+    getConductorId: async (req, res) => {
+        const { id } = req.params
+        try {
+            const conductor = await Conductor.findById({id})
+            res.json({ conductor })
+
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+    },
+
+    postConductor: async (req, res) => {
+        try {
+            const { cedula, nombre, ib_bus, experiencia, telefono } = req.body
+            const conductor = new Conductor({ cedula, nombre, ib_bus, experiencia, telefono })
+            await conductor.save()
+
+            res.json({ conductor })
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+
+
+    },
+    putConductor: async (req, res) => {
+        try {
+            const { id } = req.params
+            const { nombre, telefono, id_bus, experiencia  } = req.body
+            const conductor = await
+                Conductor.findByIdAndUpdate(id, { nombre, telefono, id_bus,experiencia }, { new: true });
+            res.json({conductor})
+        } catch (error) {
+            res.status(400).json({error})
+        }
+
+    },
+    deleteConductor: async () => {
+        try {
+            const { id } = req.params
+            const conductor = await Conductor.findByIdAndDelete(id)
+            res.json(conductor + `Conductor eliminado`)
+        } catch (error) {
+            res.status(400).json({error})
+        }
     }
+
 }
 export default httpConductor
