@@ -12,10 +12,10 @@ const httpVendedor = {
 
     },
 
-    getVendedorCedula: async (req, res) => {
-        const {cedula}=req.params
+    getVendedorId: async (req, res) => {
+        const {id}=req.params
         try {
-            const vendedor = await Vendedor.find({cc:cedula})
+            const vendedor = await Vendedor.findById({id})
             res.json({ vendedor })
             
         } catch (error) {
@@ -38,9 +38,9 @@ const httpVendedor = {
     putVendedor: async (req,res) => {
         try {
             const {id}=req.params
-            const {cedula,nombre,cuenta, clave, telefono}=req.body
+            const {nombre,cuenta, clave, telefono}=req.body
             const vendedor=await 
-                Vendedor.findByIdAndUpdate(id,{cedula,nombre,cuenta, clave, telefono},{new:true});
+                Vendedor.findByIdAndUpdate(id,{nombre,cuenta, clave, telefono},{new:true});
                 res.json({vendedor})
         } catch (error) {
             res.status(400).json({error})
@@ -50,12 +50,31 @@ const httpVendedor = {
     deleteVendedor: async()=>{
         try {
             const {id}=req.params
-            const vendedor= await Vendedor.findOneAndDelete({id})
+            const vendedor= await Vendedor.findByIdAndRemove({id})
             res.json({vendedor})
         } catch (error) {
             res.status(400).json({error})
         }
     },
+    putVendedorInactivar: async ()=>{
+        try {
+            const {id}=req.params
+            const vendedor=await Vendedor.findByIdAndUpdate(id,{estado:0},{new:true})
+            res.json({vendedor})
+        } catch (error) {
+            res.status(400).json({error})
+            
+        }
+    },
+    putVendedorActivar: async ()=>{
+        try {
+            const {id}=req.params
+            const vendedor=await Vendedor.findByIdAndUpdate(id,{estado:1},{new:true})
+            res.json({vendedor})
+        } catch (error) {
+            res.status(400).json({error})
+        }
+    }
 };
 
 export default httpVendedor;
