@@ -9,4 +9,4 @@ const busSchema = new mongoose.Schema({
 
 });
 
-export default bus [{busSchema}]
+export default mongoose.model("Bus", busSchema)

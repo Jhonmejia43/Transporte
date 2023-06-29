@@ -11,4 +11,4 @@ const conductorSchema = new mongoose.Schema({
 
 });
 
-export default bus[{ conductorSchema }]
+export default mongoose.model("Conductor", conductorSchema)

@@ -11,4 +11,4 @@ const vendedorSchema = new mongoose.Schema({
 });
 
 
-export default vendedor [{vendedorSchema}]
+export default mongoose.model("Vendedor", vendedorSchema)

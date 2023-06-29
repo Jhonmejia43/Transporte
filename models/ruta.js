@@ -9,4 +9,4 @@ const rutaSchema = new mongoose.Schema({
 
 });
 
-export default ruta [{rutaSchema}]
+export default mongoose.model("Ruta", rutaSchema)

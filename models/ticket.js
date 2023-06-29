@@ -12,4 +12,4 @@ const ticketSchema = new mongoose.Schema({
     estado:{type:Boolean, default:false}
 })
 
-export default ticket [{ticketSchema}]
+export default mongoose.model("Ticket", ticketSchema)

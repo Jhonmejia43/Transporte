@@ -10,4 +10,4 @@ const horarioSchema = new mongoose.Schema({
     estado: { type: Boolean, default: false }
 });
 
-export default ruta[{ horarioSchema }]
+export default mongoose.model("Horario", horarioSchema)
