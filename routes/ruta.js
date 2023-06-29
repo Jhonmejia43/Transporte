@@ -4,18 +4,29 @@ import { check } from "express-validator";
 
 const router=new Router()
 
-router.get('/ruta',[
-    check("precio","Digite su cedula").not().isEmpty(),
-    check("origen","Digite su cedula").not().isEmpty(),
-    check("destino","Digite su cedula").not().isEmpty()
-],httpRuta.getRuta);
+router.get('/ruta',httpRuta.getRuta);
 
-// router.get('/ruta/:codigo',funcionesruta.getrutaNombre);
 
-// router.post('/agregar',funcionesruta.postAgregarruta);
+router.get('/ruta/:id',[
+    check("id","Digite su id").not().isEmpty(),
+],httpRuta.getRutaId);
 
-// router.put('/ruta/:codigo', funcionesruta.putEditarruta);
 
-// router.delete('/ruta/:codigo', funcionesruta.deleteruta);
+router.post('/agregar',[
+    check("precio","Digite su precio").not().isEmpty(),
+    check("origen","Digite su origen").not().isEmpty(),
+    check("destino","Digite su destino").not().isEmpty()
+],httpRuta.postRuta);
+
+router.put('/ruta/:id', [
+    check("id","Digite su id").not().isEmpty(),
+    check("precio","Digite su precio").not().isEmpty(),
+    check("origen","Digite su origen").not().isEmpty(),
+    check("destino","Digite su destino").not().isEmpty()
+],httpRuta.putRuta);
+
+router.delete('/ruta/:id',[
+    check("id","Digite su id").not().isEmpty(),
+],httpRuta.getRutaId);
 
 export default router
