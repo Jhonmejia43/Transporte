@@ -1,6 +1,7 @@
 import { Router } from "express"
 import httpBus from "../controllers/bus.js"
 import { check } from "express-validator"
+import validarCampos from "..middlewares/validar.js"
 
 
 const router = new Router()
@@ -11,15 +12,18 @@ router.post('/bus/agregar', [
     check("numero_bus", "Numero del bus").not().isEmpty(),
     check("cantidad_asientos", "Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
+    validarCampos
 ], httpBus.postBus);
 
 router.post('/bus/buscar', [
-    check("numero_bus", "Número de bus requerido").not().isEmpty()
+    check("numero_bus", "Número de bus requerido").not().isEmpty(),
+    validarCampos
 ], httpBus.postBuscarBus);
 
 router.put('/bus/:numero_bus', [
-    check("cantidad_asientos", "Asientos disponibles requeridos").not().isEmpty()
-], httpBus.putEditar);
+    check("cantidad_asientos", "Asientos disponibles requeridos").not().isEmpty(),
+    validarCampos
+], httpBus.putEditarBus);
 
 router.delete('/bus/:numero_bus', httpBus.deleteBus);
 

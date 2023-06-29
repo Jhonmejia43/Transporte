@@ -1,6 +1,7 @@
 import { Router } from "express"
 import httpTicket from "../controllers/ticket.js";
 import { check } from "express-validator";
+import validarCampos from "..middlewares/validar.js"
 
 const router=new Router()
 
@@ -8,6 +9,7 @@ router.get('/ticket', httpTicket.getTicket);
 
 router.get('/ticket/:id',[
     check("id", "Digite el id").not().isEmpty(),
+    validarCampos
 ],httpTicket.getTicketId);
 
 router.post('/agregar',[
@@ -17,6 +19,7 @@ router.post('/agregar',[
     check("bus_id", "Digite el id del bus").isMongoId(),
     check("fecha_venta","Digite la fecha").isDate().isEmpty(),
     check("hora_venta","Digite la hora").isDate().isEmpty(),
+    validarCampos
 ],httpTicket.postTicket);
 
 router.put('inactivarTicket/:id',httpTicket.putTicketInactivar)

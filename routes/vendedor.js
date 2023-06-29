@@ -1,6 +1,7 @@
 import { Router } from "express"
 import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
+import validarCampos from "..middlewares/validar.js"
 
 const router=new Router()
 
@@ -14,6 +15,7 @@ router.post('/agregar',[
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
+    validarCampos
 ],httpVendedor.postVendedor);
 
 router.put('/vendedor/:id',[
@@ -21,6 +23,7 @@ router.put('/vendedor/:id',[
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
+    validarCampos
 ], httpVendedor.putVendedor);
 
 router.delete('/vendedor/:id', httpVendedor.deleteVendedor);
