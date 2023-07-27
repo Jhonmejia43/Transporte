@@ -22,6 +22,6 @@ app.use("/api/vendedor", vendedor)
 
 app.listen(process.env.PORT,()=>{
     mongoose.connect(process.env.mongoDB)
-    .then(() => console.log('Connected!'));
+    .then(() => console.log('Conectado!'));
     console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
 })
