@@ -34,6 +34,7 @@ router.put('/cliente/:id', [
 router.delete('/cliente/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
+    validarCampos
 ], httpCliente.deleteCliente);
 
 router.put('inactivarCliente/:id',[

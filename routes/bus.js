@@ -15,21 +15,29 @@ router.post('/bus/agregar', [
     validarCampos
 ], httpBus.postBus);
 
-router.put('/bus/:numero_bus', [
+router.put('/bus/:id', [
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     check("cantidad_asientos", "Asientos disponibles requeridos").not().isEmpty(),
     check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
     validarCampos
 ], httpBus.putEditarBus);
 
-router.delete('/bus/:numero_bus', httpBus.deleteBus);
+router.delete('/bus/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+], httpBus.deleteBus);
 
 router.put('inactivarBus/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
+    validarCampos
 ],httpBus.putBusInactivar)
 router.put('activarBus/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
+    validarCampos
 ],httpBus.putBusActivar)
 
 export default router
