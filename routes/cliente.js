@@ -10,6 +10,7 @@ router.get('/cliente', httpCliente.getCliente);
 
 router.get('/cliente/:id', [
     check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     validarCampos
 ], httpCliente.getClienteId);
 
@@ -22,15 +23,28 @@ router.post('cliente/agregar', [
 ], httpCliente.postCliente);
 
 router.put('/cliente/:id', [
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     check("nombre", "Digite su nombre").isLength({ min: 5 }),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos
 ], httpCliente.putCliente);
 
-router.delete('/cliente/:id', httpCliente.deleteCliente);
+router.delete('/cliente/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+], httpCliente.deleteCliente);
 
-router.put('inactivarCliente/:id',httpCliente.putClienteInactivar)
-router.put('activarCliente/:id',httpCliente.putClienteActivar)
+router.put('inactivarCliente/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpCliente.putClienteInactivar)
+router.put('activarCliente/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpCliente.putClienteActivar)
 
 export default router

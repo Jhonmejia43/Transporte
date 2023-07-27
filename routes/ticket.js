@@ -9,6 +9,7 @@ router.get('/ticket', httpTicket.getTicket);
 
 router.get('/ticket/:id',[
     check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpTicket.getTicketId);
 
@@ -22,7 +23,15 @@ router.post('/agregar',[
     validarCampos
 ],httpTicket.postTicket);
 
-router.put('inactivarTicket/:id',httpTicket.putTicketInactivar)
-router.put('activarTicket/:id',httpTicket.putTicketActivar)
+router.put('inactivarTicket/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpTicket.putTicketInactivar)
+router.put('activarTicket/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpTicket.putTicketActivar)
 
 export default router

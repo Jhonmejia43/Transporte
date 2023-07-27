@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const busSchema = new mongoose.Schema({
-    numero_bus: { type:Number, require:true },
+    numero_bus: { type:Number, require:true, unique:true },
     cantidad_asientos: { type: String, require:true  },
     empresa_asignada: { type: String, require:true },
     createAT : {type:Date,default: Date.now },

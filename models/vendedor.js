@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const vendedorSchema = new mongoose.Schema({
-    cedula: { type: String, require:true },
+    cedula: { type: String, require:true, unique:true },
     nombre: { type: String, minlenght: 5, require:true },
     cuenta: { type: String, require:true},
     clave: { type: String, require:true},

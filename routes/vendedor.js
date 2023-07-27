@@ -7,7 +7,11 @@ const router=new Router()
 
 router.get('/vendedor',httpVendedor.getVendedor);
 
-router.get('/vendedor/:id',httpVendedor.getVendedorId);
+router.get('/vendedor/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpVendedor.getVendedorId);
 
 router.post('/agregar',[
     check("cedula","Digite su cedula").not().isEmpty(),
@@ -19,6 +23,8 @@ router.post('/agregar',[
 ],httpVendedor.postVendedor);
 
 router.put('/vendedor/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     check("nombre","Digite su nombre").not().isEmpty(),
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("clave","Digite su clave").not().isEmpty(),
@@ -26,9 +32,21 @@ router.put('/vendedor/:id',[
     validarCampos
 ], httpVendedor.putVendedor);
 
-router.delete('/vendedor/:id', httpVendedor.deleteVendedor);
+router.delete('/vendedor/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+], httpVendedor.deleteVendedor);
 
-router.put('inactivarVendedor/:id',httpVendedor.putVendedorInactivar)
-router.put('activarVendedor/:id',httpVendedor.putVendedorActivar)
+router.put('inactivarVendedor/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpVendedor.putVendedorInactivar)
+router.put('activarVendedor/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpVendedor.putVendedorActivar)
 
 export default router

@@ -7,8 +7,9 @@ const router = new Router()
 
 router.get('/horario',httpHorario.getHorario);
 
-router.get('/ruta/:id',[
+router.get('/horario/:id',[
     check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpHorario.getHorarioId);
 
@@ -20,7 +21,9 @@ router.post('/agregar',[
     validarCampos
 ],httpHorario.postHorario);
 
-router.put('/ruta/:id',[
+router.put('/horario/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     check("hora_partida", "Digite la hora de partida").not().isEmpty(),
     check("hora_llegada", "Digite la hora estimada de llegada").not().isEmpty(),
     check("fecha_partida", "Digite la fecha de llegada").not().isEmpty(),
@@ -28,9 +31,21 @@ router.put('/ruta/:id',[
     validarCampos
 ], httpHorario.putHorario);
 
-router.delete('/ruta/:id', httpHorario.deleteHorario);
+router.delete('/horario/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+], httpHorario.deleteHorario);
 
-router.put('inactivarHorario/:id',httpHorario.putHorarioInactivar)
-router.put('activarHorario/:id',httpHorario.putHorarioActivar)
+router.put('inactivarHorario/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpHorario.putHorarioInactivar)
+router.put('activarHorario/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos
+],httpHorario.putHorarioActivar)
 
 export default router
