@@ -1,6 +1,6 @@
 import Vendedor from "../models/vendedor.js";
 import bcryptjs from "bcryptjs"
-import { generarJWT } from "../middlewares/validar-jwt.js";
+import  {generarJWT} from "../middlewares/validar-jwt.js";
 
 const httpVendedor = {
     getVendedor: async (req, res) => {
@@ -17,7 +17,7 @@ const httpVendedor = {
     getVendedorId: async (req, res) => {
         const {id}=req.params
         try {
-            const vendedor = await Vendedor.findById({id})
+            const vendedor = await Vendedor.findById(id)
             res.json({ vendedor })
             
         } catch (error) {
@@ -29,6 +29,9 @@ const httpVendedor = {
         try {
             const { cedula, nombre, cuenta, clave, telefono} = req.body
             const vendedor = new Vendedor({ cedula, nombre, cuenta, clave, telefono})
+            const salt = bcryptjs.genSaltSync();
+            vendedor.clave = bcryptjs.hashSync(clave, salt)
+
             await vendedor.save()
 
             res.json({ vendedor })
@@ -61,14 +64,14 @@ const httpVendedor = {
 
             if (vendedor.estado === 0) {
                 return res.status(400).json({
-                    msg: "Holder Inactivo"
+                    msg: "Vendedor Inactivo"
                 })
             }
 
             const validPassword = bcryptjs.compareSync(clave, vendedor.clave);
             if (!validPassword) {
                 return res.status(401).json({
-                    msg: "Holder / Password no son correctos"
+                    msg: "Vendedor / Password no son correctos"
                 })
             }
 
@@ -89,7 +92,7 @@ const httpVendedor = {
     deleteVendedor: async(req,res)=>{
         try {
             const {id}=req.params
-            const vendedor= await Vendedor.findByIdAndRemove({id})
+            const vendedor= await Vendedor.findByIdAndRemove(id)
             res.json({vendedor})
         } catch (error) {
             res.status(400).json({error})

@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken"
 import Vendedor from "../models/vendedor.js";
-import vendedor from "../models/vendedor.js";
 
 const generarJWT = (uid) => {
     return new Promise((resolve, reject) => {

@@ -2,6 +2,7 @@ import { Router } from "express"
 import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 const router=new Router()
 
@@ -29,24 +30,33 @@ router.put('/vendedor/:id',[
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
-    validarCampos
+    validarCampos,
+    validarJWT
 ], httpVendedor.putVendedor);
+
+router.post('/vendedor_datos',[
+    check("cuenta","Digite su cuenta").not().isEmpty(),
+    check("clave","Digite su clave").not().isEmpty(),
+],httpVendedor.login);
 
 router.delete('/vendedor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    validarCampos
+    validarCampos,
+    validarJWT
 ], httpVendedor.deleteVendedor);
 
 router.put('inactivarVendedor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    validarCampos
+    validarCampos,
+    validarJWT
 ],httpVendedor.putVendedorInactivar)
 router.put('activarVendedor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    validarCampos
+    validarCampos,
+    validarJWT
 ],httpVendedor.putVendedorActivar)
 
 export default router
