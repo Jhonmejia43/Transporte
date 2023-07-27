@@ -28,9 +28,9 @@ const httpBus = {
     putEditarBus: async (req,res) => {
         try {
             const {id}=req.params
-            const {numero_bus,cantidad_asientos, empresa_asignada}=req.body
+            const {cantidad_asientos, empresa_asignada}=req.body
             const bus=await 
-                Bus.findByIdAndUpdate(id,{numero_bus,cantidad_asientos,empresa_asignada},{new:true});
+                Bus.findByIdAndUpdate(id,{cantidad_asientos,empresa_asignada},{new:true});
                 res.json({ bus })
         } catch (error) {
             res.status(400).json({ error: "Error en el servidor" });
@@ -52,7 +52,7 @@ const httpBus = {
             res.status(400).json({ error: "Error en el servidor" });
         }
     },
-    putBusInactivar: async ()=>{
+    putBusInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const bus=await Bus.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -62,7 +62,7 @@ const httpBus = {
             
         }
     },
-    putBusActivar: async ()=>{
+    putBusActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const bus=await Bus.findByIdAndUpdate(id,{estado:1},{new:true})

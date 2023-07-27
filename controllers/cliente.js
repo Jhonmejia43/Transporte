@@ -58,7 +58,7 @@ const httpCliente = {
         }
 
     },
-    deleteCliente: async () => {
+    deleteCliente: async (req,res) => {
         try {
             const { id } = req.params
             const cliente = await Cliente.findByIdAndDelete(id)
@@ -67,7 +67,7 @@ const httpCliente = {
             res.status(400).json({error})
         }
     },
-    putClienteInactivar: async ()=>{
+    putClienteInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const cliente=await Cliente.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -77,7 +77,7 @@ const httpCliente = {
             
         }
     },
-    putClienteActivar: async ()=>{
+    putClienteActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const cliente=await Cliente.findByIdAndUpdate(id,{estado:1},{new:true})

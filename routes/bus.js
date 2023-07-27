@@ -23,9 +23,8 @@ router.put('/bus/:id', [
     validarCampos
 ], httpBus.putEditarBus);
 
-router.delete('/bus/:id',[
-    check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+router.delete('/bus/:numero_bus',[
+    check("numero_bus", "Digite el numero del bus").not().isEmpty(),
     validarCampos
 ], httpBus.deleteBus);
 

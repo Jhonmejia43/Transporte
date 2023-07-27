@@ -1,4 +1,6 @@
 import Vendedor from "../models/vendedor.js";
+import bcryptjs from "bcryptjs"
+import { generarJWT } from "../middlewares/validar-jwt.js";
 
 const httpVendedor = {
     getVendedor: async (req, res) => {
@@ -46,8 +48,45 @@ const httpVendedor = {
             res.status(400).json({error})
         }
     },
+    login: async (req, res) => {
+        const { cuenta, clave } = req.body;
 
-    deleteVendedor: async()=>{
+        try {
+            const vendedor = await Vendedor.findOne({ cuenta })
+            if (!vendedor) {
+                return res.status(400).json({
+                    msg: "Vendedor / clave no son correctos"
+                })
+            }
+
+            if (vendedor.estado === 0) {
+                return res.status(400).json({
+                    msg: "Holder Inactivo"
+                })
+            }
+
+            const validPassword = bcryptjs.compareSync(clave, vendedor.clave);
+            if (!validPassword) {
+                return res.status(401).json({
+                    msg: "Holder / Password no son correctos"
+                })
+            }
+
+            const token = await generarJWT(vendedor.id);
+
+            res.json({
+                vendedor,
+                token
+            })
+
+        } catch (error) {
+            return res.status(500).json({
+                msg: "Hable con el WebMaster"
+            })
+        }
+    },
+
+    deleteVendedor: async(req,res)=>{
         try {
             const {id}=req.params
             const vendedor= await Vendedor.findByIdAndRemove({id})
@@ -56,7 +95,7 @@ const httpVendedor = {
             res.status(400).json({error})
         }
     },
-    putVendedorInactivar: async ()=>{
+    putVendedorInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const vendedor=await Vendedor.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -66,7 +105,7 @@ const httpVendedor = {
             
         }
     },
-    putVendedorActivar: async ()=>{
+    putVendedorActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const vendedor=await Vendedor.findByIdAndUpdate(id,{estado:1},{new:true})
