@@ -14,7 +14,7 @@ const httpHorario ={
     getHorarioId: async (req, res) => {
         const { id } = req.params
         try {
-            const horario = await Horario.findById({id})
+            const horario = await Horario.findById(id)
             res.json({ horario })
 
         } catch (error) {
@@ -47,7 +47,7 @@ const httpHorario ={
         }
 
     },
-    deleteHorario: async () => {
+    deleteHorario: async (req,res) => {
         try {
             const { id } = req.params
             const horario = await Horario.findByIdAndDelete(id)
@@ -56,7 +56,7 @@ const httpHorario ={
             res.status(400).json({error})
         }
     },
-    putHorarioInactivar: async ()=>{
+    putHorarioInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const horario=await Horario.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -66,7 +66,7 @@ const httpHorario ={
             
         }
     },
-    putHorarioActivar: async ()=>{
+    putHorarioActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const horario=await Horario.findByIdAndUpdate(id,{estado:1},{new:true})

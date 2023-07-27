@@ -36,7 +36,7 @@ const httpTicket ={
 
     },
     
-    putTicketInactivar: async ()=>{
+    putTicketInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const ticket=await Ticket.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -46,7 +46,7 @@ const httpTicket ={
             
         }
     },
-    putTicketActivar: async ()=>{
+    putTicketActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const ticket=await Ticket.findByIdAndUpdate(id,{estado:1},{new:true})

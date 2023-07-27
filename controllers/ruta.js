@@ -42,7 +42,7 @@ const httpRuta ={
             res.status(400).json({error})
         }
     },
-    deleteRuta: async () => {
+    deleteRuta: async (req,res) => {
         try {
             const { id } = req.params
             const ruta = await Ruta.findByIdAndDelete(id)
@@ -51,7 +51,7 @@ const httpRuta ={
             res.status(400).json({error})
         }
     },
-    putRutaInactivar: async ()=>{
+    putRutaInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const ruta=await Ruta.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -61,7 +61,7 @@ const httpRuta ={
             
         }
     },
-    putRutaActivar: async ()=>{
+    putRutaActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const ruta=await Ruta.findByIdAndUpdate(id,{estado:1},{new:true})

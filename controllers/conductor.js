@@ -14,7 +14,7 @@ const httpConductor ={
     getConductorId: async (req, res) => {
         const { id } = req.params
         try {
-            const conductor = await Conductor.findById({id})
+            const conductor = await Conductor.findById(id)
             res.json({ conductor })
 
         } catch (error) {
@@ -47,7 +47,7 @@ const httpConductor ={
         }
 
     },
-    deleteConductor: async () => {
+    deleteConductor: async (req,res) => {
         try {
             const { id } = req.params
             const conductor = await Conductor.findByIdAndDelete(id)
@@ -56,7 +56,7 @@ const httpConductor ={
             res.status(400).json({error})
         }
     },
-    putConductorInactivar: async ()=>{
+    putConductorInactivar: async (req,res)=>{
         try {
             const {id}=req.params
             const conductor=await Conductor.findByIdAndUpdate(id,{estado:0},{new:true})
@@ -66,7 +66,7 @@ const httpConductor ={
             
         }
     },
-    putConductorActivar: async ()=>{
+    putConductorActivar: async (req,res)=>{
         try {
             const {id}=req.params
             const conductor=await Conductor.findByIdAndUpdate(id,{estado:1},{new:true})
