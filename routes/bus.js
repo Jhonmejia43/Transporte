@@ -6,6 +6,8 @@ import validarCampos from "../middlewares/validar.js"
 
 const router = new Router()
 
+router.get('/buses' ,httpBus.getBuses)
+
 router.get('/bus/:numero_bus', httpBus.getBus);
 
 router.post('/bus/agregar', [

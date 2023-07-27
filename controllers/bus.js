@@ -1,6 +1,16 @@
 import Bus from "../models/bus.js";
 
 const httpBus = {
+    getBuses: async (req, res) => {
+        try {
+            const buses = await Bus.find()
+            res.json({ buses })
+
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+
+    },
     getBus: async (req, res) => {
         const {numero_bus}=req.params
         try {
