@@ -43,7 +43,6 @@ router.delete('/vendedor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos,
-    validarJWT
 ], httpVendedor.deleteVendedor);
 
 router.put('inactivarVendedor/:id',[

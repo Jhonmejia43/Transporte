@@ -46,7 +46,11 @@ const httpVendedor = {
             const {nombre,cuenta, clave, telefono}=req.body
             const vendedor=await 
                 Vendedor.findByIdAndUpdate(id,{nombre,cuenta, clave, telefono},{new:true});
-                res.json({vendedor})
+                const salt = bcryptjs.genSaltSync();
+                vendedor.clave = bcryptjs.hashSync(clave, salt)
+                await vendedor.save()
+                    res.json({vendedor})
+            
         } catch (error) {
             res.status(400).json({error})
         }
