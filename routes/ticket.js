@@ -18,10 +18,15 @@ router.post('/agregar',[
     check("cliente_id", "Digite el id del cliente").isMongoId(),
     check("ruta_id", "Digite el id de la ruta").isMongoId(),
     check("bus_id", "Digite el id del bus").isMongoId(),
-    check("fecha_venta","Digite la fecha").isDate().isEmpty(),
-    check("hora_venta","Digite la hora").isDate().isEmpty(),
+    check("fechahora_venta","vacio").isISO8601().toDate(),
     validarCampos
 ],httpTicket.postTicket);
+
+router.delete('/ticket/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+    validarCampos,
+], httpTicket.deleteTicket);
 
 router.put('inactivarTicket/:id',[
     check("id", "Digite el id").not().isEmpty(),

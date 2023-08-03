@@ -24,8 +24,8 @@ const httpTicket ={
 
     postTicket: async (req, res) => {
         try {
-            const { vendedor_id, cliente_id, ruta_id, bus_id, fecha_venta, hora_venta} = req.body
-            const ticket = new Ticket({ vendedor_id, cliente_id, ruta_id, bus_id, fecha_venta, hora_venta })
+            const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body
+            const ticket = new Ticket({ vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta })
             await ticket.save()
 
             res.json({ ticket })
@@ -34,6 +34,15 @@ const httpTicket ={
         }
 
 
+    },
+    deleteTicket: async(req,res)=>{
+        try {
+            const {id}=req.params
+            const ticket= await Ticket.findByIdAndRemove(id)
+            res.json({ticket})
+        } catch (error) {
+            res.status(400).json({error})
+        }
     },
     
     putTicketInactivar: async (req,res)=>{
@@ -55,5 +64,6 @@ const httpTicket ={
             res.status(400).json({error})
         }
     }
+    
 }
 export default httpTicket
