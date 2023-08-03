@@ -2,6 +2,7 @@ import { Router } from "express"
 import httpRuta from "../controllers/ruta.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
+import helpersRuta from "../helpers/hp_ruta.js";
 
 
 const router=new Router()

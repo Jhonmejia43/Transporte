@@ -2,16 +2,21 @@ import { Router } from "express"
 import httpBus from "../controllers/bus.js"
 import { check } from "express-validator"
 import validarCampos from "../middlewares/validar.js"
+import helpersBus from "../helpers/hp_bus.js"
 
 
 const router = new Router()
 
 router.get('/buses' ,httpBus.getBuses)
 
-router.get('/bus/:numero_bus', httpBus.getBus);
+router.get('/bus/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
+], httpBus.getBus);
 
 router.post('/bus/agregar', [
     check("numero_bus", "Numero del bus").not().isEmpty(),
+    check("placa", "Numero del bus").not().isEmpty(),
     check("cantidad_asientos", "Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
     validarCampos
@@ -25,8 +30,9 @@ router.put('/bus/:id', [
     validarCampos
 ], httpBus.putEditarBus);
 
-router.delete('/bus/:numero_bus',[
-    check("numero_bus", "Digite el numero del bus").not().isEmpty(),
+router.delete('/bus/:id',[
+    check("id", "Digite el id").not().isEmpty(),
+    check("id", "Digite el id").isMongoId(),
     validarCampos
 ], httpBus.deleteBus);
 

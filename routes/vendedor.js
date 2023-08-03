@@ -3,6 +3,7 @@ import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
 import { validarJWT } from "../middlewares/validar-jwt.js";
+import helpersVendedor from "../helpers/hp_vendedor.js";
 
 const router=new Router()
 

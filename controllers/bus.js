@@ -12,9 +12,9 @@ const httpBus = {
 
     },
     getBus: async (req, res) => {
-        const {numero_bus}=req.params
+        const {id}=req.params
         try {
-            const bus = await Bus.find({numero_bus})
+            const bus = await Bus.findById(id)
             res.json({ bus })
             
         } catch (error) {

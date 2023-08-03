@@ -2,6 +2,7 @@ import { Router } from "express"
 import httpTicket from "../controllers/ticket.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
+import helpersTicket from "../helpers/hp_ticket.js";
 
 const router=new Router()
 

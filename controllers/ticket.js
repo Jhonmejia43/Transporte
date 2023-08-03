@@ -3,7 +3,8 @@ import Ticket from "../models/ticket.js";
 const httpTicket ={
     getTicket: async (req, res) => {
         try {
-            const ticket = await Ticket.find()
+            const ticket = await Ticket.find().populate("vendedor_id").populate("cliente_id")
+            .populate("ruta_id").populate("bus_id")
             res.json({ ticket })
 
         } catch (error) {

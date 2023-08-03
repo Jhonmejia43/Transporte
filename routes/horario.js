@@ -2,6 +2,7 @@ import { Router } from "express"
 import httpHorario from "../controllers/horario.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
+import helpersHorario from "../helpers/hp_horario.js";
 
 const router = new Router()
 
