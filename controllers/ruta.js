@@ -42,13 +42,13 @@ const httpRuta ={
             res.status(400).json({error})
         }
     },
-    deleteRuta: async (req,res) => {
+    deleteRuta: async (req, res) => {
         try {
-            const { id } = req.params
-            const ruta = await Ruta.findByIdAndDelete(id)
-            res.json(ruta + `Ruta eliminada`)
+            const { id } = req.params;
+            const ruta = await Ruta.findByIdAndDelete(id);
+            res.json(ruta);
         } catch (error) {
-            res.status(400).json({error})
+            res.status(400).json({ error });
         }
     },
     putRutaInactivar: async (req,res)=>{

@@ -129,6 +129,30 @@ const httpTicket ={
         }
     },
 
+    getGananciaPorRutaYFechas: async (req, res) => {
+        try {
+            const { rutaId, fechaInicio, fechaFin } = req.query;
+    
+            if (!rutaId || !fechaInicio || !fechaFin) {
+                return res.status(400).json({ error: 'Debes proporcionar la ruta, la fecha de inicio y la fecha de fin.' });
+            }
+    
+            const tickets = await Ticket.find({
+                ruta_id: rutaId,
+                fechahora_venta: {
+                    $gte: new Date(fechaInicio),
+                    $lte: new Date(fechaFin),
+                },
+            });
+    
+            const totalGanancia = tickets.reduce((total, ticket) => total + ticket.ruta_id.precio, 0);
+    
+            res.json({ totalGanancia });
+        } catch (error) {
+            res.status(400).json({ error });
+        }
+    },
+
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body
