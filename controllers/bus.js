@@ -24,8 +24,8 @@ const httpBus = {
 
     postBus: async (req, res) => {
         try {
-            const { numero_bus,cantidad_asientos, empresa_asignada } = req.body
-            const bus = new Bus({ numero_bus, cantidad_asientos, empresa_asignada})
+            const { numero_bus,placa,cantidad_asientos, empresa_asignada } = req.body
+            const bus = new Bus({ numero_bus,placa,cantidad_asientos, empresa_asignada})
             await bus.save()
 
             res.json({ bus })
@@ -49,9 +49,9 @@ const httpBus = {
     
     deleteBus: async (req, res) => {
         try {
-            const { numero_bus } = req.params;
+            const { id } = req.params;
 
-            const bus = await Bus.findOneAndDelete({ numero_bus });
+            const bus = await Bus.findByIdAndDelete( id );
 
             if (!bus) {
                 return res.status(404).json({ error: "Bus no encontrado" });

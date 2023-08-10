@@ -13,7 +13,7 @@ const httpRuta ={
     getRutaId: async (req, res) => {
         const { id } = req.params
         try {
-            const ruta = await Ruta.findById({id})
+            const ruta = await Ruta.findById(id)
             res.json({ ruta })
 
         } catch (error) {
