@@ -8,6 +8,4 @@ const clienteSchema = new mongoose.Schema({
     estado:{type:Boolean, default:1}
 });
 
-// export default cliente [{clienteSchema}]
-
 export default mongoose.model("Cliente", clienteSchema)

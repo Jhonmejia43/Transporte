@@ -24,6 +24,28 @@ const httpTicket ={
         }
     },
 
+    getTicketsPorFechas: async (req, res) => {
+        try {
+            const { fechaInicio, fechaFin } = req.query;
+            
+        if (!fechaInicio || !fechaFin) {
+            return res.status(400).json({ error: 'Debes proporcionar fechas de inicio y fin.' });
+        }
+    
+        const tickets = await Ticket.find({
+            fechahora_venta: {
+                $gte: new Date(fechaInicio),
+                $lte: new Date(fechaFin),
+            },
+        }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+    
+        res.json({ tickets });
+        } catch (error) {
+            res.status(400).json({ error })
+            res.status(500).json({ error: 'Error al obtener los tickets.' });
+        }
+    },
+
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body

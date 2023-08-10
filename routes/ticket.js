@@ -2,7 +2,6 @@ import { Router } from "express"
 import httpTicket from "../controllers/ticket.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
-import helpersTicket from "../helpers/hp_ticket.js";
 
 const router=new Router()
 
@@ -13,6 +12,9 @@ router.get('/ticket/:id',[
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpTicket.getTicketId);
+
+router.get('/tickets', httpTicket.getTicketsPorFechas); // Nueva ruta para listar tickets en un rango de fechas
+
 
 router.post('/agregar',[
     check("vendedor_id", "Digite el id del vendedor").isMongoId(),
