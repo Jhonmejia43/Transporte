@@ -46,7 +46,7 @@ const httpRuta ={
         try {
             const { id } = req.params
             const ruta = await Ruta.findByIdAndDelete(id)
-            res.json(ruta + `Ruta eliminada`)
+            res.json(ruta + `Ruta eliminado`)
         } catch (error) {
             res.status(400).json({error})
         }

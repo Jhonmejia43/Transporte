@@ -24,7 +24,11 @@ router.get('/tickets/vendedor',[
     validarCampos
 ], httpTicket.getTicketsPorVendedor); // Nueva ruta para listar tickets vendidos por vendedor
 
-router.get('/tickets/ganancia', httpTicket.getTotalGananciaPorFechas); // Nueva ruta para calcular la ganancia total
+router.get('/tickets/ganancia',[
+    check("fechaInicio", "Fecha inicio").not().isEmpty(),
+    check("fechaFin", "Fecha fin").not().isEmpty(),
+    validarCampos
+], httpTicket.getTotalGananciaPorFechas); // Nueva ruta para calcular la ganancia total
 
 router.get('/tickets/cliente', [
     check("clienteId", "Digite el ID del cliente").not().isEmpty(),
