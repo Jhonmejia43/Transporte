@@ -15,7 +15,8 @@ const httpTicket ={
     getTicketId: async (req, res) => {
         const { id } = req.params
         try {
-            const ticket = await Ticket.findById(id)
+            const ticket = await Ticket.findById(id).populate("vendedor_id").populate("cliente_id")
+            .populate("ruta_id").populate("bus_id")
             res.json({ ticket })
 
         } catch (error) {

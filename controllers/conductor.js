@@ -24,8 +24,8 @@ const httpConductor ={
 
     postConductor: async (req, res) => {
         try {
-            const { cedula, nombre, ib_bus, experiencia, telefono } = req.body
-            const conductor = new Conductor({ cedula, nombre, ib_bus, experiencia, telefono })
+            const { cedula, nombre, id_bus, experiencia, telefono } = req.body
+            const conductor = new Conductor({ cedula, nombre, id_bus, experiencia, telefono })
             await conductor.save()
 
             res.json({ conductor })
