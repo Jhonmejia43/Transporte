@@ -46,6 +46,89 @@ const httpTicket ={
         }
     },
 
+    getTicketsPorVendedor: async (req, res) => {
+        try {
+            const { vendedorId } = req.query;
+    
+        if (!vendedorId) {
+            return res.status(400).json({ error: 'Debes proporcionar el ID del vendedor.' });
+        }
+    
+        const tickets = await Ticket.find({
+            vendedor_id: vendedorId,
+        }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+    
+        res.json({ tickets });
+        } catch (error) {
+            res.status(400).json({ error })
+            res.status(500).json({ error: 'Error al obtener los tickets.' });
+        }
+    },
+
+    getTotalGananciaPorFechas: async (req, res) => {
+        try {
+        const { fechaInicio, fechaFin } = req.query;
+    
+        if (!fechaInicio || !fechaFin) {
+            return res.status(400).json({ error: 'Debes proporcionar fechas de inicio y fin.' });
+        }
+    
+        const tickets = await Ticket.find({
+            fechahora_venta: {
+                $gte: new Date(fechaInicio),
+                $lte: new Date(fechaFin),
+            },
+          }).populate('ruta_id'); // Agregar la población de ruta_id
+    
+        const totalGanancia = tickets.reduce((total, ticket) => total + ticket.ruta_id.precio, 0);
+    
+        res.json({ totalGanancia });
+        } catch (error) {
+            res.status(400).json({ error })
+            res.status(500).json({ error: 'Error al calcular la ganancia total.' });
+        }
+    },
+
+    getTicketsPorCliente: async (req, res) => {
+        try {
+            const { clienteId } = req.query;
+    
+            if (!clienteId) {
+                return res.status(400).json({ error: 'Debes proporcionar el ID del cliente.' });
+            }
+    
+            const tickets = await Ticket.find({
+                cliente_id: clienteId,
+            }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+    
+            res.json({ tickets });
+        } catch (error) {
+            res.status(400).json({ error });
+            res.status(500).json({ error: 'Error al obtener los tickets.' });
+        }
+    },
+
+    getRutasPorBus: async (req, res) => {
+        try {
+            const { busId } = req.query;
+    
+            if (!busId) {
+                return res.status(400).json({ error: 'Debes proporcionar el ID del bus.' });
+            }
+    
+            const tickets = await Ticket.find({
+                bus_id: busId,
+            }).populate("ruta_id");
+    
+            const rutas = tickets.map(ticket => ticket.ruta_id);
+    
+            res.json({ rutas });
+        } catch (error) {
+            res.status(400).json({ error });
+            res.status(500).json({ error: 'Error al obtener las rutas.' });
+        }
+    },
+
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body

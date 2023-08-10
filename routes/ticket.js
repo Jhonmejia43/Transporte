@@ -13,7 +13,28 @@ router.get('/ticket/:id',[
     validarCampos
 ],httpTicket.getTicketId);
 
-router.get('/tickets', httpTicket.getTicketsPorFechas); // Nueva ruta para listar tickets en un rango de fechas
+router.get('/tickets',[
+    check("fechaInicio", "Fecha inicio").not().isEmpty(),
+    check("fechaFin", "Fecha fin").not().isEmpty(),
+    validarCampos
+], httpTicket.getTicketsPorFechas); // Nueva ruta para listar tickets en un rango de fechas
+
+router.get('/tickets/vendedor',[
+    check("id_vendedor", "Digite el vendedor").not().isEmpty(),
+    validarCampos
+], httpTicket.getTicketsPorVendedor); // Nueva ruta para listar tickets vendidos por vendedor
+
+router.get('/tickets/ganancia', httpTicket.getTotalGananciaPorFechas); // Nueva ruta para calcular la ganancia total
+
+router.get('/tickets/cliente', [
+    check("clienteId", "Digite el ID del cliente").not().isEmpty(),
+    validarCampos
+], httpTicket.getTicketsPorCliente); // Nueva ruta para listar tickets comprados por cliente
+
+router.get('/tickets/rutas', [
+    check("busId", "Digite el ID del bus").not().isEmpty(),
+    validarCampos
+], httpTicket.getRutasPorBus);
 
 
 router.post('/agregar',[
