@@ -136,14 +136,15 @@ const httpTicket ={
             if (!rutaId || !fechaInicio || !fechaFin) {
                 return res.status(400).json({ error: 'Debes proporcionar la ruta, la fecha de inicio y la fecha de fin.' });
             }
-    
+    console.log(fechaInicio);
             const tickets = await Ticket.find({
                 ruta_id: rutaId,
                 fechahora_venta: {
                     $gte: new Date(fechaInicio),
                     $lte: new Date(fechaFin),
                 },
-            });
+            }).populate("ruta_id");
+            console.log(tickets);
     
             const totalGanancia = tickets.reduce((total, ticket) => total + ticket.ruta_id.precio, 0);
     

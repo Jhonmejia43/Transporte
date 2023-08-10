@@ -20,7 +20,7 @@ router.get('/tickets',[
 ], httpTicket.getTicketsPorFechas); // Nueva ruta para listar tickets en un rango de fechas
 
 router.get('/tickets/vendedor',[
-    check("id_vendedor", "Digite el vendedor").not().isEmpty(),
+    check("vendedorId", "Digite el vendedor").not().isEmpty(),
     validarCampos
 ], httpTicket.getTicketsPorVendedor); // Nueva ruta para listar tickets vendidos por vendedor
 
