@@ -3,7 +3,7 @@ import Conductor from "../models/conductor.js";
 const httpConductor ={
     getConductor: async (req, res) => {
         try {
-            const conductor = await Conductor.find()
+            const conductor = await Conductor.find().populate("id_bus")
             res.json({ conductor })
 
         } catch (error) {
