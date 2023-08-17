@@ -3,6 +3,7 @@ import httpHorario from "../controllers/horario.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
 import helpersHorario from "../helpers/hp_horario.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 const router = new Router()
 
@@ -38,12 +39,14 @@ router.delete('/horario/:id',[
     validarCampos
 ], httpHorario.deleteHorario);
 
-router.put('inactivarHorario/:id',[
+router.put('/inactivarHorario/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpHorario.putHorarioInactivar)
-router.put('activarHorario/:id',[
+router.put('/activarHorario/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

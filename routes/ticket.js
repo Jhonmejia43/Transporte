@@ -75,13 +75,13 @@ router.delete('/ticket/:id',[
     validarCampos,
 ], httpTicket.deleteTicket);
 
-router.put('inactivarTicket/:id',[
+router.put('/inactivarTicket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpTicket.putTicketInactivar)
-router.put('activarTicket/:id',[
+router.put('/activarTicket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),

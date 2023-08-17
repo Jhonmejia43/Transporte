@@ -3,6 +3,7 @@ import httpConductor from "../controllers/conductor.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
 import helpersConductor from "../helpers/hp_conductor.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 const router = new Router()
 
@@ -39,12 +40,14 @@ router.delete('/conductor/:id',[
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ], httpConductor.deleteConductor);
-router.put('inactivarConductor/:id',[
+router.put('/inactivarConductor/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpConductor.putConductorInactivar)
-router.put('activarConductor/:id',[
+router.put('/activarConductor/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

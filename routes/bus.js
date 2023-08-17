@@ -3,6 +3,7 @@ import httpBus from "../controllers/bus.js"
 import { check } from "express-validator"
 import validarCampos from "../middlewares/validar.js"
 import helpersBus from "../helpers/hp_bus.js"
+import { validarJWT } from "../middlewares/validar-jwt.js"
 
 
 const router = new Router()
@@ -36,12 +37,14 @@ router.delete('/bus/:id',[
     validarCampos
 ], httpBus.deleteBus);
 
-router.put('inactivarBus/:id',[
+router.put('/inactivarBus/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpBus.putBusInactivar)
-router.put('activarBus/:id',[
+router.put('/activarBus/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

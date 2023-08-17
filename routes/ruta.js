@@ -3,6 +3,7 @@ import httpRuta from "../controllers/ruta.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
 import helpersRuta from "../helpers/hp_ruta.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 
 const router=new Router()
@@ -42,13 +43,15 @@ router.delete('/ruta/:id',[
     validarCampos
 ],httpRuta.deleteRuta);
 
-router.put('inactivarRuta/:id',[
+router.put('/inactivarRuta/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpRuta.putRutaInactivar)
     
-router.put('activarRuta/:id',[
+router.put('/activarRuta/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

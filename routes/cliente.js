@@ -3,6 +3,7 @@ import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator"
 import validarCampos from "../middlewares/validar.js"
 import helpersCliente from "../helpers/hp_cliente.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 
 const router = new Router()
@@ -38,12 +39,14 @@ router.delete('/cliente/:id',[
     validarCampos
 ], httpCliente.deleteCliente);
 
-router.put('inactivarCliente/:id',[
+router.put('/inactivarCliente/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpCliente.putClienteInactivar)
-router.put('activarCliente/:id',[
+router.put('/activarCliente/:id',[
+    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
