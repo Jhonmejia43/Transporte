@@ -19,6 +19,8 @@ router.get('/ruta/:id',[
 
 router.post('/agregar',[
     check("precio","Digite su precio").not().isEmpty(),
+    check("horario_id", "Digite el id").not().isEmpty(),
+    check("horario_id", "Digite el id").isMongoId(),
     check("origen","Digite su origen").not().isEmpty(),
     check("destino","Digite su destino").not().isEmpty(),
     validarCampos
