@@ -38,13 +38,11 @@ router.delete('/bus/:id',[
 ], httpBus.deleteBus);
 
 router.put('/inactivarBus/:id',[
-    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpBus.putBusInactivar)
 router.put('/activarBus/:id',[
-    validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
