@@ -38,9 +38,9 @@ const httpBus = {
     putEditarBus: async (req,res) => {
         try {
             const {id}=req.params
-            const {cantidad_asientos, empresa_asignada}=req.body
+            const {numero_bus,placa,cantidad_asientos, empresa_asignada }=req.body
             const bus=await 
-                Bus.findByIdAndUpdate(id,{cantidad_asientos,empresa_asignada},{new:true});
+                Bus.findByIdAndUpdate(id,{numero_bus,placa,cantidad_asientos, empresa_asignada },{new:true});
                 res.json({ bus })
         } catch (error) {
             res.status(400).json({ error: "Error en el servidor" });

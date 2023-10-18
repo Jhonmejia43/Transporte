@@ -6,7 +6,7 @@ const vendedorSchema = new mongoose.Schema({
     cuenta: { type: String, require:true},
     clave: { type: String, require:true},
     telefono: {type: String, require:true},
-    createAT : {type:Date,default: Date.now },
+    createAT: {type:Date,default: Date.now },
     estado:{type:Boolean, default:1}
 });
 
