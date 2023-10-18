@@ -167,6 +167,18 @@ const httpTicket ={
 
 
     },
+
+    putEditarTicket: async (req, res)=>{
+        try {
+            const { id } = req.params
+            const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body
+            const ticket = await
+                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta}, { new: true });
+            res.json({ticket})
+        } catch (error) {
+            res.status(400).json({error})
+        }
+    },
     deleteTicket: async(req,res)=>{
         try {
             const {id}=req.params

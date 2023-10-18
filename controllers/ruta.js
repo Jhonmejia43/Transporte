@@ -3,7 +3,7 @@ import Ruta from "../models/ruta.js";
 const httpRuta ={
     getRuta: async (req, res) => {
         try {
-            const ruta = await Ruta.find()
+            const ruta = await Ruta.find().populate("horario_id")
             res.json({ ruta })
 
         } catch (error) {
@@ -13,7 +13,7 @@ const httpRuta ={
     getRutaId: async (req, res) => {
         const { id } = req.params
         try {
-            const ruta = await Ruta.findById(id)
+            const ruta = await Ruta.findById(id).populate("horario_id")
             res.json({ ruta })
 
         } catch (error) {
@@ -34,9 +34,9 @@ const httpRuta ={
     putRuta: async (req, res) => {
         try {
             const { id } = req.params
-            const { precio, origen, destino} = req.body
+            const { precio, horario_id,origen, destino} = req.body
             const ruta = await
-                Ruta.findByIdAndUpdate(id, { precio, origen, destino}, { new: true });
+                Ruta.findByIdAndUpdate(id, { precio, horario_id,origen, destino}, { new: true });
             res.json({ruta})
         } catch (error) {
             res.status(400).json({error})

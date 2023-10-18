@@ -18,7 +18,6 @@ router.get('/cliente/:id', [
 
 router.post('/cliente/agregar', [
     check("cedula", "Digite su cedula").not().isEmpty(),
-    check("nombre", "El nombre debe tener mas de 5 caracteres").isLength({ min: 5 }),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos
@@ -27,7 +26,7 @@ router.post('/cliente/agregar', [
 router.put('/cliente/:id', [
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    check("nombre", "Digite su nombre").isLength({ min: 5 }),
+    check("cedula", "Digite su cedula").not().isEmpty(),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos

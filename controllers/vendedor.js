@@ -43,9 +43,9 @@ const httpVendedor = {
     putVendedor: async (req,res) => {
         try {
             const {id}=req.params
-            const {nombre,cuenta, clave, telefono}=req.body
+            const { cedula, nombre, cuenta, clave, telefono} =req.body
             const vendedor=await 
-                Vendedor.findByIdAndUpdate(id,{nombre,cuenta, clave, telefono},{new:true});
+                Vendedor.findByIdAndUpdate(id,{ cedula, nombre, cuenta, clave, telefono} ,{new:true});
                 const salt = bcryptjs.genSaltSync();
                 vendedor.clave = bcryptjs.hashSync(clave, salt)
                 await vendedor.save()

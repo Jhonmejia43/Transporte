@@ -25,14 +25,16 @@ router.post('/agregar',[
 ],httpVendedor.postVendedor);
 
 router.put('/vendedor/:id',[
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
+    check("cedula","Digite su cedula").not().isEmpty(),
     check("nombre","Digite su nombre").not().isEmpty(),
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
     validarCampos,
-    validarJWT
+    
 ], httpVendedor.putVendedor);
 
 router.post('/vendedor_datos',[
