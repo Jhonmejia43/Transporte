@@ -3,7 +3,7 @@ import Conductor from "../models/conductor.js";
 const httpConductor ={
     getConductor: async (req, res) => {
         try {
-            const conductor = await Conductor.find().populate("id_bus", "numero_bus placa cantidad_asientos empresa_asignada")
+            const conductor = await Conductor.find().populate("id_bus")
             res.json({ conductor })
 
         } catch (error) {
@@ -14,7 +14,7 @@ const httpConductor ={
     getConductorId: async (req, res) => {
         const { id } = req.params
         try {
-            const conductor = await Conductor.findById(id).populate("id_bus", "numero_bus placa cantidad_asientos empresa_asignada")
+            const conductor = await Conductor.findById(id).populate("id_bus")
             res.json({ conductor })
 
         } catch (error) {
