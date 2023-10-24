@@ -60,37 +60,50 @@ router.get('/tickets/ganancia-ruta', [
 
 router.post('/agregar',[
     validarJWT,
-    check("vendedor_id", "Digite el id del vendedor").isMongoId(),
-    check("cliente_id", "Digite el id del cliente").isMongoId(),
-    check("ruta_id", "Digite el id de la ruta").isMongoId(),
-    check("bus_id", "Digite el id del bus").isMongoId(),
-    check("fechahora_venta","vacio").isISO8601().toDate(),
+    check("vendedor_id", "Digite el id del Vendedor").not().isEmpty(),
+    check("vendedor_id", "No es mongo ID").isMongoId(),
+    check("cliente_id", "Digite el id del Cliente").not().isEmpty(),
+    check("cliente_id", "No es mongo ID").isMongoId(),
+    check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
+    check("ruta_id", "No es mongo ID").isMongoId(),
+    check("bus_id", "Digite el id del Bus").not().isEmpty(),
+    check("bus_id", "No es mongo ID").isMongoId(),
+    check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     validarCampos
 ],httpTicket.postTicket);
 
 router.put('/editarTicket',[
-    check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+    check("id", "Digite el id del Ticket").not().isEmpty(),
+    check("id", "No es Mongo ID").isMongoId(),
+    check("vendedor_id", "Digite el id del Vendedor").not().isEmpty(),
+    check("vendedor_id", "No es mongo ID").isMongoId(),
+    check("cliente_id", "Digite el id del Cliente").not().isEmpty(),
+    check("cliente_id", "No es mongo ID").isMongoId(),
+    check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
+    check("ruta_id", "No es mongo ID").isMongoId(),
+    check("bus_id", "Digite el id del Bus").not().isEmpty(),
+    check("bus_id", "No es mongo ID").isMongoId(),
+    check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     validarCampos,
 ],httpTicket.putEditarTicket)
 
 router.delete('/ticket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+    check("id", "No es Mongo ID").isMongoId(),
     validarCampos,
 ], httpTicket.deleteTicket);
 
 router.put('/inactivarTicket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+    check("id", "No es Mongo ID").isMongoId(),
     validarCampos
 ],httpTicket.putTicketInactivar)
 router.put('/activarTicket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+    check("id", "No es Mongo ID").isMongoId(),
     validarCampos
 ],httpTicket.putTicketActivar)
 

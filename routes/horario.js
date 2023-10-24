@@ -17,9 +17,13 @@ router.get('/horario/:id',[
 
 router.post('/agregar',[
     check("hora_partida", "Digite la hora de partida").not().isEmpty(),
+    check("hora_partida", "Digite la hora de partida en formato HH:mm:ss")
+        .matches(/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/, "i")
+        .withMessage('La hora de partida debe tener el formato HH:mm:ss'),
     check("hora_llegada", "Digite la hora estimada de llegada").not().isEmpty(),
-    check("fecha_partida", "Digite la fecha de llegada").not().isEmpty(),
-    check("hora_llegada", "Digite la hora de llegada ").not().isEmpty(),
+    check("hora_llegada", "Digite la hora estimada de llegada en formato HH:mm:ss")
+        .matches(/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/, "i")
+        .withMessage('La hora de llegada debe tener el formato HH:mm:ss'),
     validarCampos
 ],httpHorario.postHorario);
 
@@ -27,9 +31,13 @@ router.put('/horario/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("hora_partida", "Digite la hora de partida").not().isEmpty(),
+    check("hora_partida", "Digite la hora de partida en formato HH:mm:ss")
+        .matches(/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/, "i")
+        .withMessage('La hora de partida debe tener el formato HH:mm:ss'),
     check("hora_llegada", "Digite la hora estimada de llegada").not().isEmpty(),
-    check("fecha_partida", "Digite la fecha de llegada").not().isEmpty(),
-    check("hora_llegada", "Digite la hora de llegada ").not().isEmpty(),
+    check("hora_llegada", "Digite la hora estimada de llegada en formato HH:mm:ss")
+        .matches(/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/, "i")
+        .withMessage('La hora de llegada debe tener el formato HH:mm:ss'),
     validarCampos
 ], httpHorario.putHorario);
 

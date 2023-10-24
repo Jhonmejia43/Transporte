@@ -24,8 +24,8 @@ const httpHorario ={
 
     postHorario: async (req, res) => {
         try {
-            const { hora_partida, hora_llegada, fecha_partida, fecha_llegada} = req.body
-            const horario = new Horario({ hora_partida, hora_llegada, fecha_partida, fecha_llegada })
+            const { hora_partida, hora_llegada} = req.body
+            const horario = new Horario({ hora_partida, hora_llegada})
             await horario.save()
 
             res.json({ horario })
@@ -38,9 +38,9 @@ const httpHorario ={
     putHorario: async (req, res) => {
         try {
             const { id } = req.params
-            const { hora_partida, hora_llegada, fecha_partida, fecha_llegada } = req.body
+            const { hora_partida, hora_llegada} = req.body
             const horario = await
-                Horario.findByIdAndUpdate(id, { hora_partida, hora_llegada, fecha_partida, fecha_llegada }, { new: true });
+                Horario.findByIdAndUpdate(id, { hora_partida, hora_llegada }, { new: true });
             res.json({horario})
         } catch (error) {
             res.status(400).json({error})

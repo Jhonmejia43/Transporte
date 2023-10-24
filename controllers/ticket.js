@@ -156,8 +156,8 @@ const httpTicket ={
 
     postTicket: async (req, res) => {
         try {
-            const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body
-            const ticket = new Ticket({ vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta })
+            const { vendedor_id, cliente_id, ruta_id, bus_id, no_asiento } = req.body
+            const ticket = new Ticket({ vendedor_id, cliente_id, ruta_id, bus_id, no_asiento  })
             await ticket.save()
 
             res.json({ ticket })
@@ -171,9 +171,9 @@ const httpTicket ={
     putEditarTicket: async (req, res)=>{
         try {
             const { id } = req.params
-            const { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta} = req.body
+            const { vendedor_id, cliente_id, ruta_id, bus_id, no_asiento} = req.body
             const ticket = await
-                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, ruta_id, bus_id, fechahora_venta}, { new: true });
+                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, ruta_id, bus_id, no_asiento}, { new: true });
             res.json({ticket})
         } catch (error) {
             res.status(400).json({error})
