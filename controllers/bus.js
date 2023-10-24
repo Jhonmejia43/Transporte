@@ -3,7 +3,7 @@ import Bus from "../models/bus.js";
 const httpBus = {
     getBuses: async (req, res) => {
         try {
-            const buses = await Bus.find().populate("ruta_id")
+            const buses = await Bus.find().populate({path: "ruta_id", populate: {path: "horario_id"}})
             res.json({ buses })
 
         } catch (error) {
@@ -14,7 +14,7 @@ const httpBus = {
     getBus: async (req, res) => {
         const {id}=req.params
         try {
-            const bus = await Bus.findById(id).populate("ruta_id")
+            const bus = await Bus.findById(id).populate({path: "ruta_id", populate: {path: "horario_id"}})
             res.json({ bus })
             
         } catch (error) {
