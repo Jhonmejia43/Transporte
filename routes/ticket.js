@@ -78,11 +78,6 @@ router.delete('/ticket/:id',[
     validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    check("vendedor_id", "Digite el id del vendedor").isMongoId(),
-    check("cliente_id", "Digite el id del cliente").isMongoId(),
-    check("ruta_id", "Digite el id de la ruta").isMongoId(),
-    check("bus_id", "Digite el id del bus").isMongoId(),
-    check("fechahora_venta","vacio").isISO8601().toDate(),
     validarCampos,
 ], httpTicket.deleteTicket);
 
