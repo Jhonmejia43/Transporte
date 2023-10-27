@@ -67,6 +67,7 @@ router.post('/agregar',[
     check("bus_id", "Digite el id del Bus").not().isEmpty(),
     check("bus_id", "No es mongo ID").isMongoId(),
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
+    check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     validarCampos
 ],httpTicket.postTicket);
 
@@ -80,6 +81,7 @@ router.put('/editarTicket',[
     check("bus_id", "Digite el id del Bus").not().isEmpty(),
     check("bus_id", "No es mongo ID").isMongoId(),
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
+    check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     validarCampos,
 ],httpTicket.putEditarTicket)
 
