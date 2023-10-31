@@ -68,6 +68,7 @@ router.post('/agregar',[
     check("bus_id", "No es mongo ID").isMongoId(),
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
+    check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
     validarCampos
 ],httpTicket.postTicket);
 
@@ -82,6 +83,7 @@ router.put('/editarTicket',[
     check("bus_id", "No es mongo ID").isMongoId(),
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
+    check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
     validarCampos,
 ],httpTicket.putEditarTicket)
 
