@@ -4,7 +4,7 @@ const httpTicket ={
     getTicket: async (req, res) => {
         try {
             const ticket = await Ticket.find().populate("vendedor_id").populate("cliente_id")
-            .populate("bus_id")
+            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
             res.json({ ticket })
 
         } catch (error) {
