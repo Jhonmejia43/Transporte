@@ -46,14 +46,14 @@ router.delete('/ruta/:id',[
 ],httpRuta.deleteRuta);
 
 router.put('/inactivarRuta/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpRuta.putRutaInactivar)
     
 router.put('/activarRuta/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

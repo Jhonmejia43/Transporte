@@ -48,13 +48,13 @@ router.delete('/horario/:id',[
 ], httpHorario.deleteHorario);
 
 router.put('/inactivarHorario/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpHorario.putHorarioInactivar)
 router.put('/activarHorario/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

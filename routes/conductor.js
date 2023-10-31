@@ -43,13 +43,13 @@ router.delete('/conductor/:id',[
     validarCampos
 ], httpConductor.deleteConductor);
 router.put('/inactivarConductor/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpConductor.putConductorInactivar)
 router.put('/activarConductor/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos

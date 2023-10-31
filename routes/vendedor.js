@@ -49,13 +49,13 @@ router.delete('/vendedor/:id',[
 ], httpVendedor.deleteVendedor);
 
 router.put('/inactivarVendedor/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpVendedor.putVendedorInactivar)
 router.put('/activarVendedor/:id',[
-    validarJWT,
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
