@@ -37,7 +37,8 @@ const httpTicket ={
                 $gte: new Date(fechaInicio),
                 $lte: new Date(fechaFin),
             },
-        }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+        }).populate("vendedor_id").populate("cliente_id")
+            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
     
         res.json({ tickets });
         } catch (error) {
@@ -56,7 +57,8 @@ const httpTicket ={
     
         const tickets = await Ticket.find({
             vendedor_id: vendedorId,
-        }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+        }).populate("vendedor_id").populate("cliente_id")
+            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
     
         res.json({ tickets });
         } catch (error) {
@@ -99,7 +101,8 @@ const httpTicket ={
     
             const tickets = await Ticket.find({
                 cliente_id: clienteId,
-            }).populate("vendedor_id").populate("cliente_id").populate("ruta_id").populate("bus_id");
+            }).populate("vendedor_id").populate("cliente_id")
+            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
     
             res.json({ tickets });
         } catch (error) {
