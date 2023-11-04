@@ -11,17 +11,15 @@ const helpersBus = {
     },
     placaValidator: async (req, res, next) => {
         console.log(req.body); // Verifica el contenido de req.body
-        const placa = req.body?.placa; // Asegúrate de acceder a placa correctamente
-        console.log(placa); // Verifica el valor de placa
     
-        if (!placa) {
-            throw new Error('La placa no está definida en la solicitud')
+        if (!req.body || !req.body.placa) {
+            return res.status(400).json({ message: 'La placa no está definida en la solicitud' });
         }
     
-        const existingBus = await Bus.findOne({ placa });
+        const existingBus = await Bus.findOne({ placa: req.body.placa });
     
         if (existingBus) {
-            throw new Error('La placa ya existe')
+            return res.status(400).json({ message: 'La placa ya existe' });
         }
         next();
     }
