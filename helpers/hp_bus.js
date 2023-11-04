@@ -11,6 +11,7 @@ const helpersBus = {
     },
     placaValidator: async (req, res, next) => {
         const { placa } = req.body.placa;
+        console.log(placa);
         const existingBus = await Bus.findOne({ placa });
     
         if (existingBus) {
