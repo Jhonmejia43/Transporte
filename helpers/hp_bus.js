@@ -13,13 +13,13 @@ const helpersBus = {
         console.log(req.body); // Verifica el contenido de req.body
     
         if (!req.body || !req.body.placa) {
-            return res.status(400).json({ message: 'La placa no está definida en la solicitud' });
+            throw new Error('La placa no está definida en la solicitud');
         }
     
         const existingBus = await Bus.findOne({ placa: req.body.placa });
     
         if (existingBus) {
-            return res.status(400).json({ message: 'La placa ya existe' });
+            throw new Error('La placa ya existe') ;
         }
         next();
     }
