@@ -10,7 +10,7 @@ const helpersBus = {
         req.req.BusUpdate = existe
     },
     placaValidator: async (req, res, next) => {
-        const { placa } = req.body;
+        const { placa } = req.body.placa;
         const existingBus = await Bus.findOne({ placa });
     
         if (existingBus) {
