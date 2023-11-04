@@ -15,13 +15,13 @@ const helpersBus = {
         console.log(placa); // Verifica el valor de placa
     
         if (!placa) {
-            return res.status(400).json({ message: 'La placa no está definida en la solicitud' });
+            throw new Error('La placa no está definida en la solicitud')
         }
     
         const existingBus = await Bus.findOne({ placa });
     
         if (existingBus) {
-            return res.status(400).json({ message: 'La placa ya existe' });
+            throw new Error('La placa ya existe')
         }
         next();
     }
