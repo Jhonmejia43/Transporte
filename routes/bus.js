@@ -11,44 +11,51 @@ const router = new Router()
 router.get('/buses' ,httpBus.getBuses)
 
 router.get('/bus/:id',[
-    check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
+    // validarJWT,
+    check("id", "Digite el ID").not().isEmpty(),
+    check("id", "No es Mongo ID").isMongoId(),
 ], httpBus.getBus);
 
 router.post('/bus/agregar', [
-    check("numero_bus", "Numero del bus").not().isEmpty(),
-    check("placa", "Numero del bus").not().isEmpty(),
-    check("cantidad_asientos", "Asientos disponibles").not().isEmpty(),
-    check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
+    //validarJWT,
+    check("numero_bus", "Digite el numero del bus").not().isEmpty(),
+    check("placa", "Digite la placa del bus").not().isEmpty(),
+    check("placa", "Digite la placa del bus").custom(helpersBus.placaValidator),
+    check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
+    check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
     check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
     check("ruta_id", "No es Mongo ID").isMongoId(),
     validarCampos
 ], httpBus.postBus);
 
 router.put('/bus/:id', [
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    check("numero_bus", "Numero del bus").not().isEmpty(),
-    check("placa", "Numero del bus").not().isEmpty(),
-    check("cantidad_asientos", "Asientos disponibles").not().isEmpty(),
-    check("empresa_asignada", "Nombre de la empresa").not().isEmpty(),
+    check("numero_bus", "Digite el numero del bus").not().isEmpty(),
+    check("placa", "Digite la placa del bus").not().isEmpty(),
+    check("placa", "Digite la placa del bus").custom(helpersBus.placaValidator),
+    check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
+    check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
     check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
     check("ruta_id", "No es Mongo ID").isMongoId(),
     validarCampos
 ], httpBus.putEditarBus);
 
-router.delete('/bus/:id',[
-    check("id", "Digite el id").not().isEmpty(),
-    check("id", "Digite el id").isMongoId(),
-    validarCampos
-], httpBus.deleteBus);
+// router.delete('/bus/:id',[
+//     check("id", "Digite el id").not().isEmpty(),
+//     check("id", "Digite el id").isMongoId(),
+//     validarCampos
+// ], httpBus.deleteBus);
 
 router.put('/inactivarBus/:id',[
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ],httpBus.putBusInactivar)
 router.put('/activarBus/:id',[
+    // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
