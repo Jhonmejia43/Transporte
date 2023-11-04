@@ -72,7 +72,7 @@ router.post('/agregar',[
     validarCampos
 ],httpTicket.postTicket);
 
-router.put('/editarTicket',[
+router.put('/editarTicket/:id',[
     check("id", "Digite el id del Ticket").not().isEmpty(),
     check("id", "No es Mongo ID").isMongoId(),
     check("vendedor_id", "Digite el id del Vendedor").not().isEmpty(),
