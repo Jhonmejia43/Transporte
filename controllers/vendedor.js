@@ -62,7 +62,7 @@ const httpVendedor = {
             const vendedor = await Vendedor.findOne({ cuenta })
             if (!vendedor) {
                 return res.status(400).json({
-                    msg: "Vendedor / clave no son correctos"
+                    msg: "No se encontro ningun usuario"
                 })
             }
 
@@ -75,7 +75,7 @@ const httpVendedor = {
             const validPassword = bcryptjs.compareSync(clave, vendedor.clave);
             if (!validPassword) {
                 return res.status(401).json({
-                    msg: "Vendedor / Password no son correctos"
+                    msg: "Contraseña incorrecta"
                 })
             }
 

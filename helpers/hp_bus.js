@@ -10,7 +10,7 @@ const helpersBus = {
         req.req.BusUpdate = existe
     },
     placaValidator: async (req, res, next) => {
-        console.log(req.body); // Verifica el contenido de req.body
+        console.log(req.body); 
     
         if (!req.body || !req.body.placa) {
             throw new Error('La placa no está definida en la solicitud');
