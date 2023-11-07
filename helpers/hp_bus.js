@@ -9,21 +9,13 @@ const helpersBus = {
         }
         req.req.BusUpdate = existe
     },
-    placaValidator: async (req, res, next) => {
-        console.log(req.body); 
-    
-        if (!req.body || !req.body.placa) {
-            throw new Error('La placa no está definida en la solicitud');
-        }
-    
-        const existingBus = await Bus.findOne({ placa: req.body.placa });
-    
-        if (existingBus) {
-            throw new Error('La placa ya existe') ;
-        }
-        next();
-    }
+    existePlaca: async (placa)=>{
+        const existe = await Bus.findOne({placa})
 
+        if(existe){
+            throw new Error("La placa ya esta registrada en la base de datos.")
+        }
+    }
     
 }
 export default helpersBus
