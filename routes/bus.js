@@ -34,7 +34,6 @@ router.put('/bus/:id', [
     check("id", "Digite el id").isMongoId(),
     check("numero_bus", "Digite el numero del bus").not().isEmpty(),
     check("placa", "Digite la placa del bus").not().isEmpty(),
-    check("placa", "Digite la placa del bus").custom(helpersBus.existePlaca),
     check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
     check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
