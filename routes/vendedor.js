@@ -19,7 +19,9 @@ router.post('/agregar',[
     check("cedula","Digite su cedula").not().isEmpty(),
     check("nombre","Digite su nombre").not().isEmpty(),
     check("cuenta","Digite su cuenta").not().isEmpty(),
+    check("cuenta","La cuenta ya existe en la base de datos").custom(helpersVendedor.existeCuenta),
     check("clave","Digite su clave").not().isEmpty(),
+    check("clave", "La contraseña debe tener por lo menos 8 digitos con 1 Mayscula, 1 Minuscula, 2 numeros y un caracter especial (@#$%^&+=!)").custom(helpersVendedor.validarPassword),
     check("telefono","Digite su telefono").not().isEmpty(),
     validarCampos
 ],httpVendedor.postVendedor);
