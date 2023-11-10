@@ -10,5 +10,12 @@ const helpersCliente = {
 
         req.req.ClienteUpdate = existe
     },
+    existeCedula: async (cedula)=>{
+        const existe = await Cliente.findOne({cedula})
+
+        if(existe){
+            throw new Error("Ya existe un cliente con esta cedula")
+        }
+    }
 }
 export default helpersCliente

@@ -18,6 +18,7 @@ router.get('/cliente/:id', [
 
 router.post('/cliente/agregar', [
     check("cedula", "Digite su cedula").not().isEmpty(),
+    check("cedula", "Ya existe un cliente con esta cedula").custom(helpersCliente.existeCedula),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos
