@@ -12,7 +12,7 @@ const helpersVendedor = {
     },
 
     existeCuenta: async (cuenta)=>{
-        const existe = await Bus.findOne({cuenta})
+        const existe = await Vendedor.findOne({cuenta})
 
         if(existe){
             throw new Error("La cuenta ya esta registrada en la base de datos.")
