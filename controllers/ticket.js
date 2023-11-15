@@ -5,8 +5,8 @@ import Bus from "../models/bus.js"
 const httpTicket ={
     getTicket: async (req, res) => {
         try {
-            const ticket = await Ticket.find().populate("vendedor_id").populate("cliente_id")
-            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
+            const ticket = await Ticket.find().populate("vendedor_id").populate("cliente_id").populate({path: "ruta_id", populate: {path: "horario_id"}})
+            .populate("bus_id")
             res.json({ ticket })
 
         } catch (error) {
@@ -154,8 +154,8 @@ const httpTicket ={
     },
     postTicket: async (req, res) => {
         try {
-            const { vendedor_id, cliente_id, bus_id, no_asiento, fecha_departida } = req.body
-            const ticket = new Ticket({ vendedor_id, cliente_id, bus_id, no_asiento, fecha_departida  })
+            const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body
+            const ticket = new Ticket({ vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida  })
             await ticket.save()
 
             res.json({ ticket })
@@ -168,9 +168,9 @@ const httpTicket ={
     putEditarTicket: async (req, res)=>{
         try {
             const { id } = req.params
-            const { vendedor_id, cliente_id, bus_id, no_asiento, fecha_departida} = req.body
+            const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida} = req.body
             const ticket = await
-                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, bus_id, no_asiento, fecha_departida}, { new: true });
+                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida}, { new: true });
             res.json({ticket})
         } catch (error) {
             res.status(400).json({error})
