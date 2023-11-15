@@ -214,8 +214,8 @@ const httpTicket ={
             const f2 = new Date(fecha+"T23:59:59.000Z")
             const buscar= await Ticket.find({
             $and:[
-                {ruta_id:idRuta},
-                {bus_id:idBus},
+                {ruta_id:idRuta._id},
+                {bus_id:idBus._id},
                 {fecha_salida:
                     {
                         $gte: f1,

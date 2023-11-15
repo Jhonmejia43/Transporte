@@ -24,8 +24,8 @@ const httpConductor ={
 
     postConductor: async (req, res) => {
         try {
-            const { cedula, nombre, id_bus, experiencia, telefono } = req.body
-            const conductor = new Conductor({ cedula, nombre, id_bus, experiencia, telefono })
+            const { cedula, nombre, experiencia, telefono } = req.body
+            const conductor = new Conductor({ cedula, nombre, experiencia, telefono })
             await conductor.save()
 
             res.json({ conductor })
@@ -38,9 +38,9 @@ const httpConductor ={
     putConductor: async (req, res) => {
         try {
             const { id } = req.params
-            const { cedula, nombre, id_bus, experiencia, telefono  } = req.body
+            const { cedula, nombre, experiencia, telefono  } = req.body
             const conductor = await
-                Conductor.findByIdAndUpdate(id, { cedula, nombre, id_bus, experiencia, telefono }, { new: true });
+                Conductor.findByIdAndUpdate(id, { cedula, nombre, experiencia, telefono }, { new: true });
             res.json({conductor})
         } catch (error) {
             res.status(400).json({error})

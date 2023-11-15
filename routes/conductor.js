@@ -19,8 +19,6 @@ router.post('/agregar',[
     check("cedula", "Digite su cedula").not().isEmpty(),
     check("cedula", "Digite su cedula").custom(helpersConductor.existeCedula),
     check("nombre", "Digite su nombre").not().isEmpty(),
-    check("id_bus", "Digite el id del bus").not().isEmpty(),
-    check("id_bus", "Digite el id del bus").isMongoId(),
     check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos
@@ -31,8 +29,6 @@ router.put('/conductor/:id',[
     check("id", "Digite el id").isMongoId(),
     check("cedula", "Digite su cedula").not().isEmpty(),
     check("nombre", "Digite su nombre").not().isEmpty(),
-    check("id_bus", "Digite el id del bus").not().isEmpty(),
-    check("id_bus", "Digite el id del bus").isMongoId(),
     check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos

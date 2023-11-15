@@ -3,7 +3,7 @@ import Bus from "../models/bus.js";
 const httpBus = {
     getBuses: async (req, res) => {
         try {
-            const buses = await Bus.find().populate({path: "ruta_id", populate: {path: "horario_id"}})
+            const buses = await Bus.find().populate("conductor_id")
             res.json({ buses })
 
         } catch (error) {
@@ -14,7 +14,7 @@ const httpBus = {
     getBus: async (req, res) => {
         const {id}=req.params
         try {
-            const bus = await Bus.findById(id).populate({path: "ruta_id", populate: {path: "horario_id"}})
+            const bus = await Bus.findById(id).populate("conductor_id")
             res.json({ bus })
             
         } catch (error) {
@@ -24,8 +24,8 @@ const httpBus = {
 
     postBus: async (req, res) => {
         try {
-            const { numero_bus,placa,cantidad_asientos, empresa_asignada, ruta_id } = req.body
-            const bus = new Bus({ numero_bus,placa,cantidad_asientos, empresa_asignada, ruta_id})
+            const { numero_bus, placa, cantidad_asientos, empresa_asignada, conductor_id } = req.body
+            const bus = new Bus({ numero_bus,placa,cantidad_asientos, empresa_asignada, conductor_id})
             await bus.save()
 
             res.json({ bus })
@@ -38,9 +38,9 @@ const httpBus = {
     putEditarBus: async (req,res) => {
         try {
             const {id}=req.params
-            const {numero_bus,placa,cantidad_asientos, empresa_asignada, ruta_id}=req.body
+            const {numero_bus,placa,cantidad_asientos, empresa_asignada, conductor_id}=req.body
             const bus=await 
-                Bus.findByIdAndUpdate(id,{numero_bus,placa,cantidad_asientos, empresa_asignada, ruta_id},{new:true});
+                Bus.findByIdAndUpdate(id,{numero_bus,placa,cantidad_asientos, empresa_asignada, conductor_id},{new:true});
                 res.json({ bus })
         } catch (error) {
             res.status(400).json({ error: "Error en el servidor" });

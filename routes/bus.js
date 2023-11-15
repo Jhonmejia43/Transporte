@@ -23,8 +23,8 @@ router.post('/bus/agregar', [
     check("placa", "Esta placa ya existe").custom(helpersBus.existePlaca),
     check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
-    check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
-    check("ruta_id", "No es Mongo ID").isMongoId(),
+    check("conductor_id", "Digite el Conductor").not().isEmpty(),
+    check("conductor_id", "No es Mongo ID").isMongoId(),
     validarCampos
 ], httpBus.postBus);
 
@@ -36,8 +36,8 @@ router.put('/bus/:id', [
     check("placa", "Digite la placa del bus").not().isEmpty(),
     check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
-    check("ruta_id", "Digite el id de la ruta").not().isEmpty(),
-    check("ruta_id", "No es Mongo ID").isMongoId(),
+    check("conductor_id", "Digite el Conductor").not().isEmpty(),
+    check("conductor_id", "No es Mongo ID").isMongoId(),
     validarCampos
 ], httpBus.putEditarBus);
 

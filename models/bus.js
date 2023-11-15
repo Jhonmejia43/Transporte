@@ -5,7 +5,7 @@ const busSchema = new mongoose.Schema({
     placa: {type:String, require:true,unique:true},
     cantidad_asientos: { type: String, require:true  },
     empresa_asignada: { type: String, require:true },
-    ruta_id: {type:mongoose.Schema.Types.ObjectId,ref:'Ruta', require:true},
+    conductor_id: {type:mongoose.Schema.Types.ObjectId,ref:'Ruta', require:true},
     createAT : {type:Date,default: Date.now },
     estado:{type:Boolean, default:1}
 
