@@ -107,4 +107,6 @@ router.put('/activarTicket/:id',[
     validarCampos
 ],httpTicket.putTicketActivar)
 
+router.get('/encontrarTickets', httpTicket.buscarRuta)
+
 export default router

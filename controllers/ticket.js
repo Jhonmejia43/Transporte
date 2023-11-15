@@ -1,4 +1,6 @@
 import Ticket from "../models/ticket.js";
+import Ruta from "../models/ruta.js";
+import Bus from "../models/bus.js"
 
 const httpTicket ={
     getTicket: async (req, res) => {
@@ -23,7 +25,6 @@ const httpTicket ={
             res.status(400).json({ error })
         }
     },
-
     getTicketsPorFechas: async (req, res) => {
         try {
             const { fechaInicio, fechaFin } = req.query;
@@ -46,7 +47,6 @@ const httpTicket ={
             res.status(500).json({ error: 'Error al obtener los tickets.' });
         }
     },
-
     getTicketsPorVendedor: async (req, res) => {
         try {
             const { vendedorId } = req.query;
@@ -66,7 +66,6 @@ const httpTicket ={
             res.status(500).json({ error: 'Error al obtener los tickets.' });
         }
     },
-
     getTotalGananciaPorFechas: async (req, res) => {
         try {
         const { fechaInicio, fechaFin } = req.query;
@@ -90,7 +89,6 @@ const httpTicket ={
             res.status(500).json({ error: 'Error al calcular la ganancia total.' });
         }
     },
-
     getTicketsPorCliente: async (req, res) => {
         try {
             const { clienteId } = req.query;
@@ -110,7 +108,6 @@ const httpTicket ={
             res.status(500).json({ error: 'Error al obtener los tickets.' });
         }
     },
-
     getRutasPorBus: async (req, res) => {
         try {
             const { busId } = req.query;
@@ -131,7 +128,6 @@ const httpTicket ={
             res.status(500).json({ error: 'Error al obtener las rutas.' });
         }
     },
-
     getGananciaPorRutaYFechas: async (req, res) => {
         try {
             const { rutaId, fechaInicio, fechaFin } = req.query;
@@ -156,7 +152,6 @@ const httpTicket ={
             res.status(400).json({ error });
         }
     },
-
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, bus_id, no_asiento, fecha_departida } = req.body
@@ -170,7 +165,6 @@ const httpTicket ={
 
 
     },
-
     putEditarTicket: async (req, res)=>{
         try {
             const { id } = req.params
@@ -190,8 +184,7 @@ const httpTicket ={
         } catch (error) {
             res.status(400).json({error})
         }
-    },
-    
+    },   
     putTicketInactivar: async (req,res)=>{
         try {
             const {id}=req.params
@@ -210,7 +203,40 @@ const httpTicket ={
         } catch (error) {
             res.status(400).json({error})
         }
-    }
+    },
+    buscarRuta:async (req, res) =>{
+        try {
+            const {id_ruta, id_bus, fecha} = req.query;
+            const idRuta = await Ruta.findById({id_ruta})
+            const idBus = await Bus.findById({id_bus})
+        
+            const f1 = new Date(fecha+"T00:00:00.000Z")
+            const f2 = new Date(fecha+"T23:59:59.000Z")
+            const buscar= await Ticket.find({
+            $and:[
+                {ruta_id:idRuta._id},
+                {bus_id:idBus._id},
+                {fecha_salida:
+                    {
+                        $gte: f1,
+                        $lte: f2 
+                    }
+                },
+            ]
+            }).populate("vendedor_id").populate("cliente_id").populate({path: "ruta_id", populate: {path: "horario_id"}})
+            .populate("bus_id")
+
+            let puestos=[]
+
+            buscar.forEach((r,i)=>{
+                puestos.push(r.numero_puesto)
+            })
+
+            res.json({buscar, puestos})
+        } catch (error) {
+            res.status(400).json({ error })
+        }      
+      }
     
 }
 export default httpTicket
