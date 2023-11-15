@@ -17,6 +17,7 @@ router.get('/vendedor/:id',[
 
 router.post('/agregar',[
     check("cedula","Digite su cedula").not().isEmpty(),
+    check("cedula","Digite su cedula").custom(helpersVendedor.existeCedula),
     check("nombre","Digite su nombre").not().isEmpty(),
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("cuenta","La cuenta ya existe en la base de datos").custom(helpersVendedor.existeCuenta),

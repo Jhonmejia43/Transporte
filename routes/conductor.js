@@ -17,6 +17,7 @@ router.get('/conductor/:id',[
 
 router.post('/agregar',[
     check("cedula", "Digite su cedula").not().isEmpty(),
+    check("cedula", "Digite su cedula").custom(helpersConductor.existeCedula),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("id_bus", "Digite el id del bus").not().isEmpty(),
     check("id_bus", "Digite el id del bus").isMongoId(),

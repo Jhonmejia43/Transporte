@@ -1,14 +1,11 @@
 import Vendedor from "../models/vendedor.js";
 
 const helpersVendedor = {
-    existeHolderById: async (id, req) => {
-        const existe = await Vendedor.findById(id)
-
-        if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+    existeCedula: async (cedula)=>{
+        const existe = await Vendedor.findOne({cedula})
+        if (existe) {
+            throw new Error("La cedula ya esta registrada")
         }
-
-        req.req.VendedorUpdate = existe
     },
 
     existeCuenta: async (cuenta)=>{
