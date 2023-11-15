@@ -12,6 +12,15 @@ const httpCliente = {
         }
 
     },
+    getClienteCedula: async(req, res)=>{
+        const {cedula} = req.params
+        try {
+            const cliente = await Cliente.findOne({cedula})
+            res.json({cliente})
+        } catch (error) {
+           res.status(400).json({error}) 
+        }
+    },
     getClienteId: async (req, res) => {
         const { id } = req.params
         try {
