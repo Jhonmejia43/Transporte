@@ -6,7 +6,7 @@ const httpTicket ={
     getTicket: async (req, res) => {
         try {
             const ticket = await Ticket.find().populate("vendedor_id").populate("cliente_id").populate({path: "ruta_id", populate: {path: "horario_id"}})
-            .populate("bus_id")
+            .populate({path:"bus_id", populate:{path:"conductor_id"}})
             res.json({ ticket })
 
         } catch (error) {
@@ -17,8 +17,8 @@ const httpTicket ={
     getTicketId: async (req, res) => {
         const { id } = req.params
         try {
-            const ticket = await Ticket.findById(id).populate("vendedor_id").populate("cliente_id")
-            .populate({path: "bus_id", populate: {path: "ruta_id", populate: {path: "horario_id"}}})
+            const ticket = await Ticket.findById(id).populate("vendedor_id").populate("cliente_id").populate({path: "ruta_id", populate: {path: "horario_id"}})
+            .populate({path:"bus_id", populate:{path:"conductor_id"}})
             res.json({ ticket })
 
         } catch (error) {
@@ -224,7 +224,7 @@ const httpTicket ={
                 },
             ]
             }).populate("vendedor_id").populate("cliente_id").populate({path: "ruta_id", populate: {path: "horario_id"}})
-            .populate("bus_id")
+            .populate({path:"bus_id", populate:{path:"conductor_id"}})
 
             let puestos=[]
 
