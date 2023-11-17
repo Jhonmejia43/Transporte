@@ -229,7 +229,7 @@ const httpTicket ={
             let puestos=[]
 
             buscar.forEach((r,i)=>{
-                puestos.push(r.numero_puesto)
+                puestos.push(r.no_asiento)
             })
 
             res.json({buscar, puestos})
