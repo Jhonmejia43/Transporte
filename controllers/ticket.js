@@ -207,8 +207,8 @@ const httpTicket ={
     buscarRuta:async (req, res) =>{
         try {
             const {id_ruta, id_bus, fecha} = req.query;
-            const idRuta = await Ruta.findOne({id_ruta})
-            const idBus = await Bus.findOne({id_bus})
+            const idRuta = await Ruta.findById(id_ruta)
+            const idBus = await Bus.findById(id_bus)
         
             const f1 = new Date(fecha+"T00:00:00.000Z")
             const f2 = new Date(fecha+"T23:59:59.000Z")
@@ -216,7 +216,7 @@ const httpTicket ={
             $and:[
                 {ruta_id:idRuta._id},
                 {bus_id:idBus._id},
-                {fecha_salida:
+                {fecha_departida:
                     {
                         $gte: f1,
                         $lte: f2 
