@@ -107,6 +107,14 @@ router.put('/activarTicket/:id',[
     validarCampos
 ],httpTicket.putTicketActivar)
 
-router.get('/encontrarTickets', httpTicket.buscarRuta)
+router.get('/encontrarTickets',[
+    check("id_ruta", "Digite la Ruta").not().isEmpty(),
+    check("id_ruta", "No es MongId").isMongoId(),
+    check("id_bus", "Digite el Bus").not().isEmpty(),
+    check("id_bus", "No es MongId").isMongoId(),
+    check("fecha", "Digite la fecha").not().isEmpty(),
+    check("fecha", "El formato de fecha debe ser yyyy-MM-DD").matches(/^\d{4}-\d{2}-\d{2}$/),
+    validarCampos
+],httpTicket.buscarRuta)
 
 export default router
