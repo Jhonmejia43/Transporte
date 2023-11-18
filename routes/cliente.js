@@ -19,7 +19,7 @@ router.get('/cliente/:id', [
 router.get('/cliente/:cedula', [
     check("cedula", "Digite la cedula").not().isEmpty(),
     validarCampos,
-])
+], httpCliente.getClienteCedula)
 
 router.post('/cliente/agregar', [
     check("cedula", "Digite su cedula").not().isEmpty(),
