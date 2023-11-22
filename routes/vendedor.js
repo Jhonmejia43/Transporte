@@ -22,9 +22,9 @@ router.post('/agregar',[
     check("cuenta","Digite su cuenta").not().isEmpty(),
     check("cuenta","La cuenta ya existe en la base de datos").custom(helpersVendedor.existeCuenta),
     check("clave","Digite su clave").not().isEmpty(),
-    check("clave", "La contraseña debe tener por lo menos 8 digitos con 1 Mayscula, 1 Minuscula, 2 numeros y un caracter especial (@#$%^&+=!)").custom(helpersVendedor.validarPassword),
+    check("clave", "La contraseña debe tener por lo menos 8 digitos con 1 Mayuscula, 1 Minuscula, 2 numeros y un caracter especial (@#$%^&+=!)").custom(helpersVendedor.validarPassword),
     check("telefono","Digite su telefono").not().isEmpty(),
-    validarCampos
+    validarCampos,
 ],httpVendedor.postVendedor);
 
 router.put('/vendedor/:id',[
@@ -37,7 +37,6 @@ router.put('/vendedor/:id',[
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
     validarCampos,
-    
 ], httpVendedor.putVendedor);
 
 router.post('/vendedor_datos',[
