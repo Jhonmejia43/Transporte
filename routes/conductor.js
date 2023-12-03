@@ -28,6 +28,10 @@ router.put('/conductor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("cedula", "Digite su cedula").not().isEmpty(),
+    check("cedula").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersConductor.validarCedulaUnica(id, value);
+    }),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("experiencia", "Digite sus años de experiencia").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),

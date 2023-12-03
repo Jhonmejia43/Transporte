@@ -7,5 +7,21 @@ const helpersConductor = {
             throw new Error("La cedula ya esta registrada")
         }
     },
+    validarCedulaUnica: async (id, cedula) => {
+        try {
+            const existe = await Conductor.findOne({
+                cedula,
+                _id: { $ne: id },
+            });
+
+            if (existe) {
+                throw new Error("Ya existe un Conductor con esta cedula");
+            }
+
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    },
 }
 export default helpersConductor

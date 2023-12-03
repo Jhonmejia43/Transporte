@@ -34,12 +34,12 @@ router.put('/cliente/:id', [
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("cedula", "Digite su cedula").not().isEmpty(),
-    check("nombre", "Digite su nombre").not().isEmpty(),
-    check("telefono", "Digite su telefono").not().isEmpty(),
     check("cedula").custom((value, { req }) => {
         const { id } = req.params;
         return helpersCliente.validarCedulaUnica(id, value);
     }),
+    check("nombre", "Digite su nombre").not().isEmpty(),
+    check("telefono", "Digite su telefono").not().isEmpty(),
     validarCampos
 
 ], httpCliente.putCliente);

@@ -60,8 +60,8 @@ router.get('/tickets/ganancia-ruta', [
 
 router.post('/agregar',[
     // validarJWT,
-    check("vendedor_id", "Digite el id del Vendedor").not().isEmpty(),
-    check("vendedor_id", "No es mongo ID").isMongoId(),
+    check("vendedor_id", "No hay vendedor Establecido").not().isEmpty(),
+    check("vendedor_id", "No hay vendedor Establecido").isMongoId(),
     check("cliente_id", "Digite el id del Cliente").not().isEmpty(),
     check("cliente_id", "No es mongo ID").isMongoId(), 
     check("bus_id", "Digite el id del Bus").not().isEmpty(),
@@ -75,8 +75,8 @@ router.post('/agregar',[
 router.put('/editarTicket/:id',[
     check("id", "Digite el id del Ticket").not().isEmpty(),
     check("id", "No es Mongo ID").isMongoId(),
-    check("vendedor_id", "Digite el id del Vendedor").not().isEmpty(),
-    check("vendedor_id", "No es mongo ID").isMongoId(),
+    check("vendedor_id", "No hay vendedor Establecido").not().isEmpty(),
+    check("vendedor_id", "No hay vendedor Establecido").isMongoId(),
     check("cliente_id", "Digite el id del Cliente").not().isEmpty(),
     check("cliente_id", "No es mongo ID").isMongoId(),
     check("bus_id", "Digite el id del Bus").not().isEmpty(),

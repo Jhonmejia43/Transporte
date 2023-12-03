@@ -34,6 +34,10 @@ router.put('/bus/:id', [
     check("id", "Digite el id").isMongoId(),
     check("numero_bus", "Digite el numero del bus").not().isEmpty(),
     check("placa", "Digite la placa del bus").not().isEmpty(),
+    check("placa").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersBus.validarPlacaUnica(id, value);
+    }),
     check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
     check("empresa_asignada", "Digite el nombre de la empresa").not().isEmpty(),
     check("conductor_id", "Digite el Conductor").not().isEmpty(),

@@ -32,8 +32,16 @@ router.put('/vendedor/:id',[
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("cedula","Digite su cedula").not().isEmpty(),
+    check("cedula").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersVendedor.validarCedulaUnica(id, value);
+    }),
     check("nombre","Digite su nombre").not().isEmpty(),
     check("cuenta","Digite su cuenta").not().isEmpty(),
+    check("cuenta").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersVendedor.validarCuentaUnica(id, value);
+    }),
     check("clave","Digite su clave").not().isEmpty(),
     check("telefono","Digite su telefono").not().isEmpty(),
     validarCampos,

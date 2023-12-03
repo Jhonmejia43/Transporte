@@ -15,7 +15,23 @@ const helpersBus = {
         if(existe){
             throw new Error("La placa ya esta registrada en la base de datos.")
         }
-    }
+    },
+    validarPlacaUnica: async (id, placa) => {
+        try {
+            const clienteExistente = await Cliente.findOne({
+                placa,
+                _id: { $ne: id },
+            });
+
+            if (clienteExistente) {
+                throw new Error("Ya existe un bus con esta placa");
+            }
+
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    },
     
 }
 export default helpersBus

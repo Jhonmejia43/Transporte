@@ -21,5 +21,38 @@ const helpersVendedor = {
             throw new Error("La contraseña debe tener por lo menos 8 digitos con 1 Mayscula, 1 Minuscula, 2 numeros y un caracter especial (@#$%^&+=!)");
         }
     }, 
+
+    validarCedulaUnica: async (id, cedula) => {
+        try {
+            const existeVendedor = await Vendedor.findOne({
+                cedula,
+                _id: { $ne: id },
+            });
+
+            if (existeVendedor) {
+                throw new Error("Ya existe un vendedor con esta cedula");
+            }
+
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    },
+    validarCuentaUnica: async (id, cuenta) => {
+        try {
+            const existeVendedor = await Cliente.findOne({
+                cuenta,
+                _id: { $ne: id },
+            });
+
+            if (existeVendedor) {
+                throw new Error("Ya existe un vendedor con esta cuenta");
+            }
+
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    },
 }
 export default helpersVendedor
