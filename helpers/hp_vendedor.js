@@ -40,7 +40,7 @@ const helpersVendedor = {
     },
     validarCuentaUnica: async (id, cuenta) => {
         try {
-            const existeVendedor = await Cliente.findOne({
+            const existeVendedor = await Vendedor.findOne({
                 cuenta,
                 _id: { $ne: id },
             });

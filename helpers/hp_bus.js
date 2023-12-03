@@ -18,7 +18,7 @@ const helpersBus = {
     },
     validarPlacaUnica: async (id, placa) => {
         try {
-            const clienteExistente = await Cliente.findOne({
+            const clienteExistente = await Bus.findOne({
                 placa,
                 _id: { $ne: id },
             });
