@@ -19,6 +19,7 @@ router.get('/bus/:id',[
 router.post('/bus/agregar', [
     //validarJWT,
     check("numero_bus", "Digite el numero del bus").not().isEmpty(),
+    check("numero_bus", "Digite el numero del bus").not().isEmpty(),
     check("placa", "Digite la placa del bus").not().isEmpty(),
     check("placa", "Esta placa ya existe").custom(helpersBus.existePlaca),
     check("cantidad_asientos", "Digite los Asientos disponibles").not().isEmpty(),
@@ -33,6 +34,10 @@ router.put('/bus/:id', [
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("numero_bus", "Digite el numero del bus").not().isEmpty(),
+    check("numero_bus").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersBus.validarPlacaUnica(id, value);
+    }),
     check("placa", "Digite la placa del bus").not().isEmpty(),
     check("placa").custom((value, { req }) => {
         const { id } = req.params;
