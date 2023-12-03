@@ -30,31 +30,37 @@ router.post('/cliente/agregar', [
 ], httpCliente.postCliente);
 
 router.put('/cliente/:id', [
+
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     check("cedula", "Digite su cedula").not().isEmpty(),
     check("nombre", "Digite su nombre").not().isEmpty(),
     check("telefono", "Digite su telefono").not().isEmpty(),
+    check("cedula").custom((value, { req }) => {
+        const { id } = req.params;
+        return helpersCliente.validarCedulaUnica(id, value);
+    }),
     validarCampos
+
 ], httpCliente.putCliente);
 
-router.delete('/cliente/:id',[
+router.delete('/cliente/:id', [
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
 ], httpCliente.deleteCliente);
 
-router.put('/inactivarCliente/:id',[
+router.put('/inactivarCliente/:id', [
     // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
-],httpCliente.putClienteInactivar)
-router.put('/activarCliente/:id',[
+], httpCliente.putClienteInactivar)
+router.put('/activarCliente/:id', [
     // validarJWT,
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
     validarCampos
-],httpCliente.putClienteActivar)
+], httpCliente.putClienteActivar)
 
 export default router
