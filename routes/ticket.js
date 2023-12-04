@@ -71,10 +71,9 @@ router.post('/agregar',[
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
-    check("no_asiento", "Este asiento ya esta ocupado").custom(async (no_asiento, { req }) => {
+    check("no_asiento", "Este asiento ya esta ocupado").custom((no_asiento, { req }) => {
     const { bus_id, ruta_id, fecha_departida } = req.body;
-    await helpersTicket.validarAsientoDisponible(bus_id, ruta_id, fecha_departida, no_asiento);
-    return true;
+    return helpersTicket.validarAsientoDisponible(bus_id, ruta_id, fecha_departida, no_asiento);
     }),
     validarCampos
 ],httpTicket.postTicket);
@@ -91,11 +90,10 @@ router.put('/editarTicket/:id',[
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
-    check("no_asiento", "Este asiento ya esta ocupado").custom(async (no_asiento, { req }) => {
+    check("no_asiento",).custom((no_asiento, { req }) => {
         const { bus_id, ruta_id, fecha_departida } = req.body;
         const {id} = req.params;
-        await helpersTicket.validarAsientoDisponibleEditar(id, bus_id, ruta_id, fecha_departida, no_asiento);
-        return true;
+        return helpersTicket.validarAsientoDisponibleEditar(id, bus_id, ruta_id, fecha_departida, no_asiento);
       }),
     validarCampos,
 ],httpTicket.putEditarTicket)

@@ -11,7 +11,7 @@ const helpersTicket = {
         req.req.TicketUpdate = existe
     },
 
-    validarAsientoDisponible: async (busId, rutaId, fechaPartida, noAsiento) => {
+    validarAsientoDisponible: async (busId, rutaId, fechaPartida, no_asiento) => {
         try {
           const tickets = await Ticket.find({
             bus_id: busId,
@@ -21,8 +21,8 @@ const helpersTicket = {
     
           const asientosOcupados = tickets.map(ticket => ticket.no_asiento);
     
-          if (asientosOcupados.includes(noAsiento)) {
-            throw new Error(`El asiento ${noAsiento} ya está ocupado`);
+          if (asientosOcupados.includes(no_asiento)) {
+            throw new Error(`El asiento ${no_asiento} ya está ocupado`);
           }
         } catch (error) {
           throw new Error(error.message);
