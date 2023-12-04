@@ -155,7 +155,10 @@ const httpTicket ={
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body
-            const ticket = new Ticket({ vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida  })
+            const fecha = new Date(fecha_departida+"T00:00:01.000Z")
+            
+            
+            const ticket = new Ticket({ vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida:fecha  })
             await ticket.save()
 
             res.json({ ticket })
@@ -169,8 +172,10 @@ const httpTicket ={
         try {
             const { id } = req.params
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida} = req.body
+            const fecha = new Date(fecha_departida+"T00:00:01.000Z")
+            
             const ticket = await
-                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida}, { new: true });
+                Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida:fecha}, { new: true });
             res.json({ticket})
         } catch (error) {
             res.status(400).json({error})
