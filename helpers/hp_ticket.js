@@ -44,6 +44,10 @@ const helpersTicket = {
             fecha_departida: fecha_departida,
             _id: { $ne: id },
           });
+
+          if(tickets){
+            throw new Error (tickets)
+          }
       
           const asientosOcupados = tickets.map(ticket => ticket.no_asiento);
       
