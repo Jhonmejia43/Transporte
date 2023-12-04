@@ -155,7 +155,7 @@ const httpTicket ={
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body
-            const fecha = new Date(fecha_departida+"T00:00:01.000Z")
+            const fecha = new Date(fecha_departida+"T01:00:00.000Z")
             
             
             const ticket = new Ticket({ vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida:fecha  })
@@ -172,7 +172,7 @@ const httpTicket ={
         try {
             const { id } = req.params
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida} = req.body
-            const fecha = new Date(fecha_departida+"T00:00:01.000Z")
+            const fecha = new Date(fecha_departida+"T01:00:00.000Z")
             
             const ticket = await
                 Ticket.findByIdAndUpdate(id, { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida:fecha}, { new: true });
