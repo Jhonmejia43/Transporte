@@ -28,19 +28,19 @@ const helpersTicket = {
           throw new Error(error.message);
         }
       },
-      validarAsientoDisponibleEditar: async (ticketId, busId, rutaId, fechaPartida, noAsiento) => {
+      validarAsientoDisponibleEditar: async (id, busId, rutaId, fechaPartida, no_asiento) => {
         try {
           const tickets = await Ticket.find({
             bus_id: busId,
             ruta_id: rutaId,
             fecha_departida: fechaPartida,
-            _id: { $ne: ticketId },
+            _id: { $ne: id },
           });
     
           const asientosOcupados = tickets.map(ticket => ticket.no_asiento);
     
-          if (asientosOcupados.includes(noAsiento)) {
-            throw new Error(`El asiento ${noAsiento} ya está ocupado`);
+          if (asientosOcupados.includes(no_asiento)) {
+            throw new Error(`El asiento ${no_asiento} ya está ocupado`);
           }
         } catch (error) {
           throw new Error(error.message);
