@@ -3,6 +3,8 @@ import httpTicket from "../controllers/ticket.js";
 import { check } from "express-validator";
 import validarCampos from "../middlewares/validar.js"
 import { validarJWT } from "../middlewares/validar-jwt.js";
+import helpersTicket from "../helpers/hp_ticket.js";
+
 
 const router=new Router()
 
@@ -67,8 +69,14 @@ router.post('/agregar',[
     check("bus_id", "Digite el id del Bus").not().isEmpty(),
     check("bus_id", "No es mongo ID").isMongoId(),
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
+    
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
+    check("no_asiento").custom(async (noAsiento, { req }) => {
+    const { bus_id, ruta_id, fecha_departida } = req.body;
+    await helpersTicket.validarAsientoDisponible(bus_id, ruta_id, fecha_departida, noAsiento);
+    return true;
+    }),
     validarCampos
 ],httpTicket.postTicket);
 
@@ -84,6 +92,12 @@ router.put('/editarTicket/:id',[
     check("no_asiento", "Digite el numero de asiento").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida").not().isEmpty(),
     check("fecha_departida", "Digite la fecha de Partida en formato yyyy-mm-dd").matches(/^\d{4}-\d{2}-\d{2}$/),
+    check("no_asiento").custom(async (noAsiento, { req }) => {
+        const { bus_id, ruta_id, fecha_departida } = req.body;
+        const ticketId = req.params.id;
+        await helpersTicket.validarAsientoDisponibleEditar(ticketId, bus_id, ruta_id, fecha_departida, noAsiento);
+        return true;
+      }),
     validarCampos,
 ],httpTicket.putEditarTicket)
 
