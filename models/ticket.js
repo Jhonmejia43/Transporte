@@ -6,7 +6,7 @@ const ticketSchema = new mongoose.Schema({
     cliente_id:{type:mongoose.Schema.Types.ObjectId,ref:'Cliente', require:true},
     ruta_id:{type:mongoose.Schema.Types.ObjectId, ref: "Ruta", require:true},
     bus_id:{type:mongoose.Schema.Types.ObjectId,ref:'Bus', require:true},
-    no_asiento:{type: Number, require:true, unique:true},
+    no_asiento:{type: Number, require:true,},
     fecha_departida: {type: Date, require:true},
     fechahora_venta:{type:Date, default: Date.now},
     createAT : {type:Date,default: Date.now },
