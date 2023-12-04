@@ -35,7 +35,7 @@ const helpersTicket = {
           const totalAsientos = bus.cantidad_asientos;
       
           if (no_asiento < 1 || no_asiento > totalAsientos) {
-            throw new Error(`El número de asiento debe estar entre 1 y ${totalAsientos} + ${id} ${bus_id} ${ruta_id} ${fecha_departida} ${no_asiento}}`);
+            throw new Error(`El número de asiento debe estar entre 1 y ${totalAsientos} + ${id}, ${bus_id}, ${ruta_id}, ${fecha_departida}, ${no_asiento}}`);
           }
       
           const tickets = await Ticket.find({
