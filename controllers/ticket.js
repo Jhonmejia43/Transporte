@@ -156,7 +156,7 @@ const httpTicket = {
         try {
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body;
 
-            const fecha = new Date(fecha_departida + "T01:00:00.000Z");
+            const fecha = new Date(fecha_departida + "T20:05:47.062+00:00");
 
             const ticket = new Ticket({
                 vendedor_id,
@@ -179,7 +179,7 @@ const httpTicket = {
             const { id } = req.params;
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body;
 
-            const fecha = new Date(fecha_departida + "T01:00:00.000Z");
+            const fecha = new Date(fecha_departida + "T20:05:47.062+00:00");
 
             const ticket = await Ticket.findByIdAndUpdate(
                 id,
