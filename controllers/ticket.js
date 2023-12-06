@@ -155,9 +155,9 @@ const httpTicket = {
     postTicket: async (req, res) => {
         try {
             const { vendedor_id, cliente_id, bus_id, ruta_id, no_asiento, fecha_departida } = req.body;
-
+    
             const fecha = new Date(fecha_departida + "T20:05:47.062+00:00");
-
+    
             const ticket = new Ticket({
                 vendedor_id,
                 cliente_id,
@@ -166,10 +166,14 @@ const httpTicket = {
                 no_asiento,
                 fecha_departida: fecha,
             });
-
-            await ticket.save().populate("vendedor_id").populate("cliente_id").populate({ path: "ruta_id", populate: { path: "horario_id" } })
-            .populate({ path: "bus_id", populate: { path: "conductor_id" } });
-
+    
+            await ticket.save();
+    
+            await ticket.populate("vendedor_id")
+                .populate("cliente_id")
+                .populate({ path: "ruta_id", populate: { path: "horario_id" } })
+                .populate({ path: "bus_id", populate: { path: "conductor_id" } })
+    
             res.json({ ticket });
         } catch (error) {
             res.status(400).json({ error: error.message });
