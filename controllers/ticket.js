@@ -167,7 +167,8 @@ const httpTicket = {
                 fecha_departida: fecha,
             });
 
-            await ticket.save();
+            await ticket.save().populate("vendedor_id").populate("cliente_id").populate({ path: "ruta_id", populate: { path: "horario_id" } })
+            .populate({ path: "bus_id", populate: { path: "conductor_id" } });
 
             res.json({ ticket });
         } catch (error) {
@@ -187,7 +188,8 @@ const httpTicket = {
                 { new: true }
             );
 
-            res.json({ ticket });
+            res.json({ ticket }).populate("vendedor_id").populate("cliente_id").populate({ path: "ruta_id", populate: { path: "horario_id" } })
+            .populate({ path: "bus_id", populate: { path: "conductor_id" } });
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
