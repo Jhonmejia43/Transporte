@@ -173,6 +173,7 @@ const httpTicket = {
                 .populate("cliente_id")
                 .populate({ path: "ruta_id", populate: { path: "horario_id" } })
                 .populate({ path: "bus_id", populate: { path: "conductor_id" } })
+                .execPopulate();
     
             res.json({ ticket });
         } catch (error) {
