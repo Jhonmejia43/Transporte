@@ -1,14 +1,33 @@
 import Ruta from "../models/ruta.js";
 
 const helpersRuta = {
-    existeHolderById: async (id, req) => {
-        const existe = await Ruta.findById(id)
+    existeRuta: async (horario_id, req) => {
+        const {origen, destino} = req.req.body;
+
+        const existe = await Ruta.findById({
+            horario_id: horario_id,
+            origen: origen,
+            destino: destino
+        })
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Esta ruta ya existe`)
         }
-
-        req.req.RutaUpdate = existe
     },
+    exsteRutaEditar: async(id, req)=>{
+        const {horario_id, origen, destino} = req.req.body;
+
+        const existe = await Ruta.find({
+            horario_id: horario_id,
+            origen: origen,
+            destino: destino,
+            _id: { $ne: id },
+        })
+
+        if (!existe) {
+            throw new Error(`Esta ruta ya existe`)
+        }
+    }
+
 }
 export default helpersRuta

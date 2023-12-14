@@ -24,18 +24,19 @@ router.post('/agregar',[
     check("horario_id", "Digite el id").isMongoId(),
     check("origen","Digite su origen").not().isEmpty(),
     check("destino","Digite su destino").not().isEmpty(),
+    check("horario_id", "Esta ruta ya existe").custom(helpersRuta.existeRuta),
     validarCampos
 ],httpRuta.postRuta);
 
 router.put('/ruta/:id', [
     check("id", "Digite el id").not().isEmpty(),
     check("id", "Digite el id").isMongoId(),
-    check("id","Digite su id").not().isEmpty(),
     check("precio","Digite su precio").not().isEmpty(),
     check("horario_id", "Digite el id").not().isEmpty(),
     check("horario_id", "Digite el id").isMongoId(),
     check("origen","Digite su origen").not().isEmpty(),
     check("destino","Digite su destino").not().isEmpty(),
+    check("id","Esta ruta ya existe").custom(helpersRuta.exsteRutaEditar),
     validarCampos
 ],httpRuta.putRuta);
 
