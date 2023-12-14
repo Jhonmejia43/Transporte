@@ -24,7 +24,6 @@ router.post('/agregar',[
     check("horario_id", "Digite el id").isMongoId(),
     check("origen","Digite su origen").not().isEmpty(),
     check("destino","Digite su destino").not().isEmpty(),
-    check("horario_id", "Esta ruta ya existe").custom(helpersRuta.existeRuta),
     validarCampos
 ],httpRuta.postRuta);
 

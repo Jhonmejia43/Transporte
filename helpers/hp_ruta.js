@@ -4,7 +4,7 @@ const helpersRuta = {
     existeRuta: async (horario_id, req) => {
         const {origen, destino} = req.req.body;
 
-        const existe = await Ruta.findById({
+        const existe = await Ruta.findOne({
             horario_id: horario_id,
             origen: origen,
             destino: destino
@@ -17,7 +17,7 @@ const helpersRuta = {
     exsteRutaEditar: async(id, req)=>{
         const {horario_id, origen, destino} = req.req.body;
 
-        const existe = await Ruta.find({
+        const existe = await Ruta.findOne({
             horario_id: horario_id,
             origen: origen,
             destino: destino,
