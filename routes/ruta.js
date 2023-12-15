@@ -35,7 +35,7 @@ router.put('/ruta/:id', [
     check("horario_id", "Digite el id").isMongoId(),
     check("origen","Digite su origen").not().isEmpty(),
     check("destino","Digite su destino").not().isEmpty(),
-    check("id","Esta ruta ya existe").custom(helpersRuta.exsteRutaEditar),
+    // check("id","Esta ruta ya existe").custom(helpersRuta.exsteRutaEditar),
     validarCampos
 ],httpRuta.putRuta);
 
